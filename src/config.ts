@@ -33,3 +33,19 @@ export const localeMeta: Record<Locale, { label: string; short: string; htmlLang
 
 export const legalPages = ['privacy', 'cookies', 'terms'] as const;
 export type LegalPage = (typeof legalPages)[number];
+
+// Concept videos (AI-generated, hosted on Higgsfield's CDN). Poster is the first frame.
+export const videos: Record<LineId, { src: string; poster: string }> = {
+  care: {
+    src: 'https://d8j0ntlcm91z4.cloudfront.net/user_3K7BCZTI6GBZ94wcr8ysimkGppY/hf_20261022_201741_2f45488b-a24a-425e-a25d-cf5a90f765f6.mp4',
+    poster: 'https://d8j0ntlcm91z4.cloudfront.net/user_3K7BCZTI6GBZ94wcr8ysimkGppY/hf_20261022_185416_b6a8d4d1-8cab-442f-9ba1-fcfb861bda3d.png',
+  },
+  guard: {
+    src: 'https://d8j0ntlcm91z4.cloudfront.net/user_3K7BCZTI6GBZ94wcr8ysimkGppY/hf_20261022_201632_79e4a9a6-6579-455c-be3c-cd00154bccd6.mp4',
+    poster: 'https://d8j0ntlcm91z4.cloudfront.net/user_3K7BCZTI6GBZ94wcr8ysimkGppY/hf_20261022_185417_d4cc3231-cf55-4b2c-9f9e-f919b51eb857.png',
+  },
+  play: {
+    src: 'https://d8j0ntlcm91z4.cloudfront.net/user_3K7BCZTI6GBZ94wcr8ysimkGppY/hf_20261022_201631_f5be34e1-6f6d-472b-9b56-ff1f0b41d687.mp4',
+    poster: 'https://d8j0ntlcm91z4.cloudfront.net/user_3K7BCZTI6GBZ94wcr8ysimkGppY/hf_20261022_185417_6f208cee-30cb-4579-8062-f5ff4db89154.png',
+  },
+};

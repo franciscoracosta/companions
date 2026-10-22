@@ -45,6 +45,13 @@ const de: Dict = {
       },
     },
   },
+  videos: {
+    eyebrow: `Zu Hause`,
+    title: `${B} im Alltag.`,
+    subtitle: `Drei Momente, drei Aufgaben. Ein Vorgeschmack darauf, wie jeder ${B} Teil Ihres Zuhauses wird.`,
+    label: `Konzept-Simulation`,
+    note: `Computergenerierte Videos zur Veranschaulichung des Konzepts. Das Endprodukt kann abweichen.`,
+  },
   how: {
     eyebrow: 'Im Inneren',
     title: 'Außen einfach. Innen richtig klug.',

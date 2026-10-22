@@ -1,0 +1,144 @@
+---
+import { lines, videos, type LineId, type Locale } from '../config';
+import { t } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const d = t(Astro.props.locale);
+const order: LineId[] = ['care', 'guard', 'play'];
+---
+
+<section class="section showcase" id="at-home">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">{d.videos.eyebrow}</span>
+      <h2 class="h2">{d.videos.title}</h2>
+      <p class="lead">{d.videos.subtitle}</p>
+    </div>
+
+    <div class="grid">
+      {order.map((id, i) => (
+        <figure class:list={['tile', { 'tile--wide': i === 0 }]} style={`--accent:${lines[id].color}`} data-reveal>
+          {videos[id].src ? (
+            <video src={videos[id].src} poster={videos[id].poster} muted loop playsinline autoplay preload="metadata" aria-label={d.lines.items[id].name} />
+          ) : (
+            <img src={videos[id].poster} alt={d.lines.items[id].name} loading="lazy" />
+          )}
+          <span class="badge">{d.videos.label}</span>
+          <figcaption>
+            <strong>{d.lines.items[id].name}</strong>
+            <span>{d.lines.items[id].tagline}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="note">{d.videos.note}</p>
+  </div>
+</section>
+
+<style>
+  .showcase {
+    padding-top: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .tile {
+    position: relative;
+    margin: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--ink);
+    box-shadow: var(--shadow);
+  }
+
+  .tile--wide {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 7;
+  }
+
+  video,
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease);
+  }
+
+  .tile:hover video,
+  .tile:hover img {
+    transform: scale(1.03);
+  }
+
+  .badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(27, 26, 46, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  figcaption {
+    position: absolute;
+    inset: auto 0 0;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 48px 24px 20px;
+    background: linear-gradient(transparent, rgba(27, 26, 46, 0.75));
+    color: #fff;
+  }
+
+  figcaption strong {
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  figcaption strong::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    vertical-align: middle;
+  }
+
+  figcaption span {
+    font-size: 15px;
+    opacity: 0.85;
+  }
+
+  .note {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 720px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tile,
+    .tile--wide {
+      aspect-ratio: 16 / 10;
+    }
+  }
+</style>

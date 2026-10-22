@@ -45,6 +45,13 @@ const it: Dict = {
       },
     },
   },
+  videos: {
+    eyebrow: `A casa`,
+    title: `${B} nella vita di tutti i giorni.`,
+    subtitle: `Tre momenti, tre missioni. Un assaggio di come ogni ${B} entrerà nella tua casa.`,
+    label: `Simulazione concettuale`,
+    note: `Video generati al computer per illustrare il concetto. Il prodotto finale potrebbe essere diverso.`,
+  },
   how: {
     eyebrow: 'Dentro',
     title: 'Semplice fuori. Molto intelligente dentro.',

@@ -45,6 +45,13 @@ const fr: Dict = {
       },
     },
   },
+  videos: {
+    eyebrow: `À la maison`,
+    title: `${B} au quotidien.`,
+    subtitle: `Trois moments, trois missions. Un aperçu de la place que chaque ${B} prendra chez vous.`,
+    label: `Simulation conceptuelle`,
+    note: `Vidéos générées par ordinateur pour illustrer le concept. Le produit final peut différer.`,
+  },
   how: {
     eyebrow: "À l'intérieur",
     title: 'Simple au dehors. Très malin au dedans.',

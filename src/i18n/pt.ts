@@ -44,6 +44,13 @@ const pt = {
       },
     },
   },
+  videos: {
+    eyebrow: `Em casa`,
+    title: `Veja o ${B} no dia a dia.`,
+    subtitle: `Três momentos, três missões. Um vislumbre de como cada ${B} vai fazer parte da sua casa.`,
+    label: `Simulação conceptual`,
+    note: `Vídeos gerados por computador para ilustrar o conceito. O produto final pode ser diferente.`,
+  },
   how: {
     eyebrow: 'Por dentro',
     title: 'Simples por fora. Muito inteligente por dentro.',
