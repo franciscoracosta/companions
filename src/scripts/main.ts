@@ -112,6 +112,11 @@ if (!reduced) {
     );
   }
 
+  // Investor page: use-of-funds bars grow in
+  document.querySelectorAll<HTMLElement>('[data-bar]').forEach((bar, i) => {
+    gsap.from(bar, { scaleX: 0, duration: 1.2, delay: i * 0.12, ease: 'power3.out', scrollTrigger: { trigger: bar, start: 'top 90%', once: true } });
+  });
+
   // Product cards tilt toward the pointer
   if (finePointer) {
     document.querySelectorAll<HTMLElement>('[data-tilt]').forEach((card) => {

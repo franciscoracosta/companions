@@ -1,11 +1,11 @@
 ---
 import Logo from './Logo.astro';
-import { locales, localeMeta, type LegalPage, type Locale } from '../config';
+import { locales, localeMeta, type Locale, type SitePage } from '../config';
 import { href, t } from '../i18n';
 
 interface Props {
   locale: Locale;
-  page?: LegalPage;
+  page?: SitePage;
 }
 
 const { locale, page } = Astro.props;

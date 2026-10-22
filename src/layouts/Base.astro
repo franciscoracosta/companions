@@ -2,14 +2,14 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { brand, locales, localeMeta, defaultLocale, type LegalPage, type Locale } from '../config';
+import { brand, locales, localeMeta, defaultLocale, type Locale, type SitePage } from '../config';
 import { href } from '../i18n';
 
 interface Props {
   locale: Locale;
   title: string;
   description: string;
-  page?: LegalPage;
+  page?: SitePage;
 }
 
 const { locale, title, description, page } = Astro.props;

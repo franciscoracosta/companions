@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { brand, type Locale } from '../config';
-import { href, t } from '../i18n';
+import { href, t, tInvestors } from '../i18n';
 
 interface Props {
   locale: Locale;
@@ -9,6 +9,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const d = t(locale);
+const inv = tInvestors(locale);
 const year = new Date().getFullYear();
 ---
 
@@ -20,7 +21,10 @@ const year = new Date().getFullYear();
     </div>
     <div>
       <h4>{d.footer.contact}</h4>
-      <a href={`mailto:${brand.email}`}>{brand.email}</a>
+      <ul>
+        <li><a href={`mailto:${brand.email}`}>{brand.email}</a></li>
+        <li><a href={href(locale, 'investors')} lang={inv.lang}>{inv.d.nav}</a></li>
+      </ul>
     </div>
     <div>
       <h4>{d.footer.legal}</h4>

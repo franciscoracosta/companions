@@ -33,6 +33,7 @@ export const localeMeta: Record<Locale, { label: string; short: string; htmlLang
 
 export const legalPages = ['privacy', 'cookies', 'terms'] as const;
 export type LegalPage = (typeof legalPages)[number];
+export type SitePage = LegalPage | 'investors';
 
 // Concept videos (AI-generated, hosted on Higgsfield's CDN). Poster is the first frame.
 export const videos: Record<LineId, { src: string; poster: string }> = {
