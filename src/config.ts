@@ -1,7 +1,7 @@
 // Single source of truth for the brand. Rename the brand or change prices here.
 export const brand = {
   name: 'Wobi',
-  email: 'hello@wobi.example',
+  email: 'hello@getwobi.com',
   company: 'Wobi Robotics',
   // Shown in legal pages until the company is registered.
   legalEntity: 'Wobi Robotics (em constituição)',

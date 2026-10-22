@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { locale, title, description, page } = Astro.props;
-const site = Astro.site ?? new URL('https://wobi.example');
+const site = Astro.site ?? new URL('https://getwobi.com');
 const canonical = new URL(href(locale, page), site).toString();
 const ogImage = new URL('/og.png', site).toString();
 ---

@@ -36,5 +36,5 @@ Para acrescentar uma língua: adicionar o código em `locales` e `localeMeta` no
 ## Pendente
 
 - **Formulário de pré-encomenda:** neste momento só valida o email e mostra a mensagem de sucesso, sem guardar nada (`src/scripts/main.ts`). Quando o domínio estiver configurado na Resend, criar um endpoint (por exemplo uma Vercel Function) que adiciona o contacto a uma audiência da Resend.
-- **Email de contacto:** `hello@wobi.example` é provisório.
+- **Email de contacto:** `hello@getwobi.com` (domínio comprado na Vercel; falta configurar a receção de email).
 - **Textos legais:** são uma base. Devem ser revistos por um jurista antes de recolher dados reais.

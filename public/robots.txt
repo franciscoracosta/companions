@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://wobi.example/sitemap-index.xml
+Sitemap: https://getwobi.com/sitemap-index.xml
