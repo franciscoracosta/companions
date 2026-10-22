@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { brand, locales, localeMeta, defaultLocale, type LegalPage, type Locale } from '../config';
+import { href } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  page?: LegalPage;
+}
+
+const { locale, title, description, page } = Astro.props;
+const site = Astro.site ?? new URL('https://wobi.example');
+const canonical = new URL(href(locale, page), site).toString();
+const ogImage = new URL('/og.png', site).toString();
+---
+
+<!doctype html>
+<html lang={localeMeta[locale].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {locales.map((l) => <link rel="alternate" hreflang={localeMeta[l].htmlLang} href={new URL(href(l, page), site).toString()} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(href(defaultLocale, page), site).toString()} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#fff8ee" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={brand.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={localeMeta[locale].htmlLang.replace('-', '_')} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="sr-only" href="#main">Skip</a>
+    <Nav locale={locale} page={page} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

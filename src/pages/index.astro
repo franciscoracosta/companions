@@ -1,0 +1,41 @@
+---
+import { brand, defaultLocale, locales, localeMeta } from '../config';
+
+// Static root: send visitors to their saved or browser language, falling back to the default.
+const map = Object.fromEntries(locales.map((l) => [localeMeta[l].htmlLang.toLowerCase(), l]));
+---
+
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{brand.name}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta http-equiv="refresh" content={`2;url=/${defaultLocale}/`} />
+    <noscript><meta http-equiv="refresh" content={`0;url=/${defaultLocale}/`} /></noscript>
+    <script is:inline define:vars={{ locales, map, fallback: defaultLocale }}>
+      let target = fallback;
+      try {
+        const saved = localStorage.getItem('locale');
+        if (saved && locales.includes(saved)) target = saved;
+        else {
+          for (const raw of navigator.languages || [navigator.language]) {
+            const lang = (raw || '').toLowerCase();
+            if (map[lang]) { target = map[lang]; break; }
+            if (lang === 'pt-br') { target = 'br'; break; }
+            const base = lang.split('-')[0];
+            if (locales.includes(base)) { target = base; break; }
+          }
+        }
+      } catch (e) {}
+      location.replace('/' + target + '/');
+    </script>
+    <style>
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #fff8ee; color: #1b1a2e; font-family: system-ui, sans-serif; }
+    </style>
+  </head>
+  <body>
+    <a href={`/${defaultLocale}/`}>{brand.name}</a>
+  </body>
+</html>

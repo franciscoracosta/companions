@@ -1,0 +1,263 @@
+---
+import Robot from './Robot.astro';
+import type { Locale } from '../config';
+import { t } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const d = t(Astro.props.locale);
+const icons = [
+  'M9 3h6M9 21h6M3 9v6M21 9v6M7 7h10v10H7zM10 10h4v4h-4z',
+  'M8 21l2-7M16 21l-2-7M12 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zM6 21h12',
+  'M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM11 18h2',
+  'M12 2l9 5v10l-9 5-9-5V7zM12 22V12M21 7l-9 5-9-5',
+];
+const trustIcons = [
+  'M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5z',
+  'M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11zM12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',
+  'M3 12a9 9 0 1 0 3-6.7M3 4v5h5',
+];
+---
+
+<section class="section how" id="how">
+  <div class="wrap">
+    <div class="section-head center" data-reveal>
+      <span class="eyebrow">{d.how.eyebrow}</span>
+      <h2 class="h2">{d.how.title}</h2>
+      <p class="lead">{d.how.subtitle}</p>
+    </div>
+
+    <div class="how-grid">
+      <div class="col">
+        {d.how.items.slice(0, 2).map((it, i) => (
+          <div class="feat" data-reveal>
+            <span class="icon"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d={icons[i]} /></svg></span>
+            <h3>{it.title}</h3>
+            <p>{it.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="xray" data-xray aria-hidden="true">
+        <div class="scan"></div>
+        <Robot variant="play" blueprint />
+        <span class="dim dim--h">8 cm</span>
+        <span class="dim dim--v">12 cm</span>
+      </div>
+      <div class="col">
+        {d.how.items.slice(2).map((it, i) => (
+          <div class="feat" data-reveal>
+            <span class="icon"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d={icons[i + 2]} /></svg></span>
+            <h3>{it.title}</h3>
+            <p>{it.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="trust" data-reveal>
+      <h3 class="trust-title">{d.trust.title}</h3>
+      <div class="trust-items">
+        {d.trust.items.map((it, i) => (
+          <div class="trust-item">
+            <span class="icon icon--sm"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d={trustIcons[i]} /></svg></span>
+            <div>
+              <strong>{it.title}</strong>
+              <p>{it.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: clamp(28px, 5vw, 56px);
+    margin-inline: clamp(8px, 1.5vw, 20px);
+    overflow: hidden;
+  }
+
+  .how::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(124, 243, 230, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 243, 230, 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at center, #000 10%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 10%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .center .h2,
+  .center .lead {
+    margin-inline: auto;
+  }
+
+  .how .eyebrow {
+    color: var(--eye);
+  }
+
+  .how .lead {
+    color: rgba(255, 248, 238, 0.7);
+  }
+
+  .how-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .col {
+    display: grid;
+    gap: 48px;
+  }
+
+  .feat h3 {
+    font-size: 24px;
+    margin-top: 16px;
+  }
+
+  .feat p {
+    margin-top: 8px;
+    color: rgba(255, 248, 238, 0.68);
+    font-size: 16px;
+  }
+
+  .icon {
+    display: inline-grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(124, 243, 230, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(124, 243, 230, 0.25);
+  }
+
+  .icon svg {
+    fill: none;
+    stroke: var(--eye);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .icon--sm {
+    flex: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  .xray {
+    position: relative;
+    padding: 30px;
+  }
+
+  .xray :global(.robot) {
+    width: 100%;
+  }
+
+  .scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--eye), transparent);
+    box-shadow: 0 0 24px 4px rgba(124, 243, 230, 0.5);
+    animation: scan 3.6s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  @keyframes scan {
+    0%,
+    100% {
+      top: 5%;
+    }
+    50% {
+      top: 92%;
+    }
+  }
+
+  .dim {
+    position: absolute;
+    font: 600 12px/1 var(--font-body);
+    color: var(--eye);
+    letter-spacing: 0.06em;
+    opacity: 0.8;
+  }
+
+  .dim--h {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .dim--v {
+    right: -8px;
+    top: 50%;
+    transform: rotate(90deg);
+  }
+
+  .trust {
+    position: relative;
+    margin-top: clamp(64px, 9vw, 110px);
+    padding: clamp(28px, 4vw, 44px);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .trust-title {
+    font-size: clamp(26px, 3vw, 36px);
+  }
+
+  .trust-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 28px;
+  }
+
+  .trust-item {
+    display: flex;
+    gap: 14px;
+  }
+
+  .trust-item p {
+    color: rgba(255, 248, 238, 0.68);
+    font-size: 15px;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 960px) {
+    .how-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .xray {
+      order: -1;
+      max-width: 320px;
+      margin-inline: auto;
+    }
+
+    .col {
+      gap: 32px;
+    }
+
+    .trust-items {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

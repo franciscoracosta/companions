@@ -1,0 +1,576 @@
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/inter';
+
+:root {
+  --cream: #fff8ee;
+  --cream-2: #fdeedb;
+  --paper: #ffffff;
+  --ink: #1b1a2e;
+  --ink-2: #4a4860;
+  --ink-3: #7b7990;
+  --line: rgba(27, 26, 46, 0.1);
+  --coral: #ff6b4a;
+  --coral-soft: #ffe1d9;
+  --sky: #3d8bff;
+  --sky-soft: #dcebff;
+  --sun: #ffb627;
+  --sun-soft: #fff1cc;
+  --mint: #2fc59a;
+  --eye: #7cf3e6;
+
+  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, sans-serif;
+
+  --radius: 28px;
+  --radius-sm: 16px;
+  --shadow: 0 1px 0 rgba(27, 26, 46, 0.04), 0 18px 40px -18px rgba(27, 26, 46, 0.25);
+  --shadow-lg: 0 30px 80px -30px rgba(27, 26, 46, 0.35);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --wrap: 1200px;
+  --gutter: clamp(16px, 4vw, 40px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--wrap) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(80px, 12vw, 150px);
+  position: relative;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--coral);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.h2 {
+  font-size: clamp(36px, 5.4vw, 64px);
+  margin-top: 14px;
+  max-width: 16ch;
+}
+
+.lead {
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: var(--ink-2);
+  max-width: 58ch;
+  margin-top: 18px;
+}
+
+.section-head {
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+/* Buttons */
+.btn {
+  --bg: var(--ink);
+  --fg: var(--cream);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 600 16px/1 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.3s;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -12px rgba(27, 26, 46, 0.5);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn--coral {
+  --bg: var(--coral);
+  --fg: #fff;
+}
+
+.btn--ghost {
+  --bg: transparent;
+  --fg: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--line);
+}
+
+.btn--ghost:hover {
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+
+.btn--sm {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 15px;
+}
+
+.btn .arrow {
+  transition: transform 0.4s var(--ease);
+}
+
+.btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Logo */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 36px;
+  height: 36px;
+}
+
+.logo-word {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.logo-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 5s infinite;
+}
+
+/* Robot */
+.robot {
+  --r-main: var(--coral);
+  --r-light: #ff9a7f;
+  --r-dark: #2a2840;
+  --r-eye: var(--eye);
+  --r-accent: var(--sun);
+  --ex: 0px;
+  --ey: 0px;
+  overflow: visible;
+}
+
+.robot--care {
+  --r-main: #ff6b4a;
+  --r-light: #ffa48c;
+  --r-accent: #ffd1c4;
+}
+
+.robot--guard {
+  --r-main: #3d8bff;
+  --r-light: #8fc0ff;
+  --r-accent: #ffb627;
+}
+
+.robot--play {
+  --r-main: #ffb627;
+  --r-light: #ffd978;
+  --r-accent: #ff6b4a;
+}
+
+.robot * {
+  transform-box: fill-box;
+}
+
+.r-shadow {
+  fill: rgba(27, 26, 46, 0.14);
+  transform-origin: center;
+  animation: shadow 1.6s var(--ease) infinite;
+}
+
+.r-limb,
+.r-foot {
+  fill: var(--r-dark);
+}
+
+.r-shell {
+  stroke: rgba(27, 26, 46, 0.08);
+  stroke-width: 1.5;
+}
+
+.r-shine {
+  fill: #fff;
+  opacity: 0.35;
+}
+
+.r-arm {
+  fill: var(--r-main);
+  transform-origin: 50% 15%;
+}
+
+.r-arm--l {
+  animation: arm-l 3.2s ease-in-out infinite;
+}
+
+.r-arm--r {
+  animation: arm-r 3.2s ease-in-out infinite;
+}
+
+.robot--play .r-arm--r {
+  animation: wave 1.4s ease-in-out infinite;
+}
+
+.r-screen {
+  fill: var(--ink);
+}
+
+.r-eyes {
+  transform: translate(var(--ex), var(--ey));
+  transition: transform 0.25s var(--ease);
+}
+
+.r-eye {
+  fill: var(--r-eye);
+  transform-origin: center;
+  animation: blink 4.6s infinite;
+}
+
+.r-mouth {
+  fill: none;
+  stroke: var(--r-eye);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.r-cheek {
+  fill: #ff8fa3;
+  opacity: 0.55;
+}
+
+.robot--care .r-cheek {
+  fill: #fff;
+  opacity: 0.4;
+}
+
+.r-emblem path {
+  fill: #fff;
+  opacity: 0.9;
+}
+
+.r-tip {
+  fill: var(--r-accent);
+}
+
+.robot--care .r-tip {
+  fill: #fff;
+  stroke: var(--r-main);
+  stroke-width: 3;
+}
+
+.r-tip--alt {
+  fill: var(--sky);
+}
+
+.r-wave {
+  fill: none;
+  stroke: var(--r-accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  animation: radar 1.8s ease-out infinite;
+}
+
+.r-prop {
+  transform-origin: center;
+  animation: spin 1.2s linear infinite;
+}
+
+.r-antenna {
+  transform-origin: 50% 100%;
+  animation: antenna 3s ease-in-out infinite;
+}
+
+/* Waddle: body sways, legs alternate */
+.r-body {
+  transform-origin: 50% 100%;
+  animation: sway 1.6s ease-in-out infinite;
+}
+
+.r-leg {
+  transform-origin: 50% 0%;
+}
+
+.r-leg--l {
+  animation: step-l 1.6s ease-in-out infinite;
+}
+
+.r-leg--r {
+  animation: step-r 1.6s ease-in-out infinite;
+}
+
+.robot--blueprint .r-shell,
+.robot--blueprint .r-arm,
+.robot--blueprint .r-limb,
+.robot--blueprint .r-foot,
+.robot--blueprint .r-tip {
+  fill: none;
+  stroke: var(--eye);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.robot--blueprint .r-screen {
+  fill: rgba(124, 243, 230, 0.08);
+  stroke: var(--eye);
+  stroke-width: 1.5;
+}
+
+.robot--blueprint .r-shine,
+.robot--blueprint .r-cheek,
+.robot--blueprint .r-shadow {
+  display: none;
+}
+
+.robot--blueprint .r-emblem path {
+  fill: none;
+  stroke: var(--eye);
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-3deg) translateY(0);
+  }
+  25% {
+    transform: rotate(0deg) translateY(-4px);
+  }
+  50% {
+    transform: rotate(3deg) translateY(0);
+  }
+  75% {
+    transform: rotate(0deg) translateY(-4px);
+  }
+}
+
+@keyframes step-l {
+  0%,
+  50%,
+  100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes step-r {
+  0%,
+  50%,
+  100% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes shadow {
+  0%,
+  50%,
+  100% {
+    transform: scaleX(1);
+  }
+  25%,
+  75% {
+    transform: scaleX(0.9);
+  }
+}
+
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes arm-l {
+  0%,
+  100% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes arm-r {
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(-20deg);
+  }
+  50% {
+    transform: rotate(-60deg);
+  }
+}
+
+@keyframes antenna {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes radar {
+  0% {
+    opacity: 1;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Reveal: hidden only when JS runs (it adds .js to <html>), so content stays visible without JS */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

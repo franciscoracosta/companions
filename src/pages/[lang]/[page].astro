@@ -1,0 +1,83 @@
+---
+import Base from '../../layouts/Base.astro';
+import { brand, legalPages, locales, localeMeta, type LegalPage, type Locale } from '../../config';
+import { href, t, tLegal } from '../../i18n';
+import { legalUpdated } from '../../i18n/legal/types';
+
+export function getStaticPaths() {
+  return locales.flatMap((lang) => legalPages.map((page) => ({ params: { lang, page } })));
+}
+
+const locale = Astro.params.lang as Locale;
+const page = Astro.params.page as LegalPage;
+const d = t(locale);
+const doc = tLegal(locale)[page];
+const updated = new Intl.DateTimeFormat(localeMeta[locale].htmlLang, { dateStyle: 'long' }).format(new Date(legalUpdated));
+---
+
+<Base locale={locale} page={page} title={`${doc.title} · ${brand.name}`} description={doc.intro}>
+  <article class="wrap legal">
+    <a class="back" href={href(locale)}>← {d.footer.back}</a>
+    <h1>{doc.title}</h1>
+    <p class="updated">{d.footer.updated}: {updated}</p>
+    <p class="intro">{doc.intro}</p>
+    {doc.sections.map((s) => (
+      <section>
+        <h2>{s.h}</h2>
+        {s.p.map((p) => <p>{p}</p>)}
+      </section>
+    ))}
+  </article>
+</Base>
+
+<style>
+  .legal {
+    max-width: calc(760px + var(--gutter) * 2);
+    padding-block: 150px 100px;
+  }
+
+  .back {
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink-3);
+  }
+
+  .back:hover {
+    color: var(--coral);
+  }
+
+  h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    margin-top: 24px;
+  }
+
+  .updated {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+
+  .intro {
+    margin-top: 28px;
+    font-size: 20px;
+    color: var(--ink-2);
+  }
+
+  section {
+    margin-top: 40px;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  section p + p {
+    margin-top: 10px;
+  }
+
+  section p {
+    color: var(--ink-2);
+  }
+</style>

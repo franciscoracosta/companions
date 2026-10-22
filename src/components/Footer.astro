@@ -1,0 +1,103 @@
+---
+import Logo from './Logo.astro';
+import { brand, type Locale } from '../config';
+import { href, t } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const d = t(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <Logo />
+      <p>{d.footer.tagline}</p>
+    </div>
+    <div>
+      <h4>{d.footer.contact}</h4>
+      <a href={`mailto:${brand.email}`}>{brand.email}</a>
+    </div>
+    <div>
+      <h4>{d.footer.legal}</h4>
+      <ul>
+        <li><a href={href(locale, 'privacy')}>{d.footer.privacy}</a></li>
+        <li><a href={href(locale, 'cookies')}>{d.footer.cookies}</a></li>
+        <li><a href={href(locale, 'terms')}>{d.footer.terms}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© {year} {brand.company}. {d.footer.rights}</span>
+    <span>{d.footer.made}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: 72px 32px;
+    border-top: 1px solid var(--line);
+    background: var(--cream);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-brand p {
+    margin-top: 14px;
+    color: var(--ink-2);
+    max-width: 32ch;
+  }
+
+  h4 {
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+    font-family: var(--font-body);
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  a:hover {
+    color: var(--coral);
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 720px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

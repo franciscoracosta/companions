@@ -1,0 +1,95 @@
+---
+import type { LineId } from '../config';
+
+interface Props {
+  variant: LineId;
+  class?: string;
+  blueprint?: boolean;
+  label?: string;
+}
+
+const { variant, class: cls = '', blueprint = false, label } = Astro.props;
+const id = `${variant}-${Math.random().toString(36).slice(2, 7)}`;
+---
+
+<svg
+  class:list={['robot', `robot--${variant}`, { 'robot--blueprint': blueprint }, cls]}
+  viewBox="0 0 200 250"
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  data-robot
+>
+  <defs>
+    <linearGradient id={`shell-${id}`} x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="var(--r-light)" />
+      <stop offset="1" stop-color="var(--r-main)" />
+    </linearGradient>
+    <radialGradient id={`glow-${id}`} cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="var(--r-eye)" stop-opacity="0.55" />
+      <stop offset="1" stop-color="var(--r-eye)" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <ellipse class="r-shadow" cx="100" cy="240" rx="52" ry="6" />
+
+  <g class="r-legs">
+    <g class="r-leg r-leg--l">
+      <rect x="70" y="180" width="12" height="44" rx="6" class="r-limb" />
+      <ellipse cx="72" cy="230" rx="20" ry="8" class="r-foot" />
+    </g>
+    <g class="r-leg r-leg--r">
+      <rect x="118" y="180" width="12" height="44" rx="6" class="r-limb" />
+      <ellipse cx="128" cy="230" rx="20" ry="8" class="r-foot" />
+    </g>
+  </g>
+
+  <g class="r-body">
+    {/* Antenna, one per line */}
+    <g class="r-antenna">
+      <rect x="97" y="14" width="6" height="30" rx="3" class="r-limb" />
+      {variant === 'care' && (
+        <path class="r-tip" d="M100 18c-4-7-15-6-15 2 0 7 9 11 15 16 6-5 15-9 15-16 0-8-11-9-15-2z" />
+      )}
+      {variant === 'guard' && (
+        <g class="r-radar">
+          <circle cx="100" cy="14" r="8" class="r-tip" />
+          <path d="M84 6a22 22 0 0 0 0 16M116 6a22 22 0 0 1 0 16" class="r-wave" />
+        </g>
+      )}
+      {variant === 'play' && (
+        <g class="r-prop">
+          <ellipse cx="86" cy="12" rx="15" ry="5" class="r-tip" />
+          <ellipse cx="114" cy="12" rx="15" ry="5" class="r-tip r-tip--alt" />
+          <circle cx="100" cy="12" r="5" class="r-limb" />
+        </g>
+      )}
+    </g>
+
+    {/* Arms */}
+    <ellipse class="r-arm r-arm--l" cx="28" cy="128" rx="11" ry="24" />
+    <ellipse class="r-arm r-arm--r" cx="172" cy="128" rx="11" ry="24" />
+
+    {/* Shell */}
+    <rect x="30" y="40" width="140" height="150" rx="62" class="r-shell" fill={blueprint ? 'none' : `url(#shell-${id})`} />
+    <ellipse cx="72" cy="66" rx="22" ry="10" class="r-shine" transform="rotate(-20 72 66)" />
+
+    {/* Face screen */}
+    <rect x="48" y="66" width="104" height="66" rx="30" class="r-screen" />
+    <ellipse cx="100" cy="100" rx="46" ry="26" fill={`url(#glow-${id})`} class="r-glow" />
+    <g class="r-eyes">
+      <rect x="70" y="84" width="17" height="26" rx="8.5" class="r-eye" />
+      <rect x="113" y="84" width="17" height="26" rx="8.5" class="r-eye" />
+      <path d="M90 118q10 7 20 0" class="r-mouth" />
+    </g>
+    <circle cx="62" cy="120" r="6" class="r-cheek" />
+    <circle cx="138" cy="120" r="6" class="r-cheek" />
+
+    {/* Chest emblem */}
+    <g class="r-emblem" transform="translate(100 160)">
+      {variant === 'care' && <path d="M0 -4c-3-6-13-5-13 2 0 6 8 10 13 14 5-4 13-8 13-14 0-7-10-8-13-2z" />}
+      {variant === 'guard' && <path d="M0 -12l12 4v7c0 8-5 13-12 16-7-3-12-8-12-16v-7z" />}
+      {variant === 'play' && <path d="M0 -12l3.5 7.5 8 1-6 5.5 1.6 8-7.1-4-7.1 4 1.6-8-6-5.5 8-1z" />}
+    </g>
+  </g>
+</svg>

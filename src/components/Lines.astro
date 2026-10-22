@@ -1,0 +1,190 @@
+---
+import Robot from './Robot.astro';
+import { lines, localeMeta, type LineId, type Locale } from '../config';
+import { formatPrice, href, t } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const d = t(locale);
+const order: LineId[] = ['care', 'guard', 'play'];
+---
+
+<section class="section" id="robots">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">{d.lines.eyebrow}</span>
+      <h2 class="h2">{d.lines.title}</h2>
+      <p class="lead">{d.lines.subtitle}</p>
+    </div>
+
+    <div class="cards">
+      {order.map((id) => {
+        const item = d.lines.items[id];
+        const meta = lines[id];
+        return (
+          <article class={`card card--${id}`} style={`--accent:${meta.color};--soft:${meta.soft}`} data-reveal data-tilt>
+            <div class="card-visual">
+              <span class="ring" aria-hidden="true" />
+              <Robot variant={id} />
+            </div>
+            <div class="card-body">
+              <span class="tag">{item.tagline}</span>
+              <h3>{item.name}</h3>
+              <p class="desc">{item.desc}</p>
+              <ul>
+                {item.features.map((f) => (
+                  <li>
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <div class="card-foot">
+                <span class="price"><small>{d.lines.from}</small> {formatPrice(meta.price, localeMeta[locale].htmlLang)}</span>
+                <a class="btn btn--sm" href={href(locale, undefined, 'preorder')} data-pick={id}>{d.nav.cta}</a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: box-shadow 0.5s var(--ease);
+    will-change: transform;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .card-visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 36px 0 18px;
+    background: var(--soft);
+    overflow: hidden;
+  }
+
+  .card-visual :global(.robot) {
+    width: 58%;
+    position: relative;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .card:hover .card-visual :global(.robot) {
+    transform: scale(1.06) translateY(-6px);
+  }
+
+  .ring {
+    position: absolute;
+    width: 80%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px dashed color-mix(in srgb, var(--accent) 35%, transparent);
+    animation: spin 40s linear infinite;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 28px;
+  }
+
+  .tag {
+    align-self: flex-start;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--soft);
+    color: color-mix(in srgb, var(--accent) 70%, var(--ink));
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 34px;
+    margin-top: 14px;
+  }
+
+  .desc {
+    margin-top: 10px;
+    color: var(--ink-2);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 22px 0 0;
+    display: grid;
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  li svg {
+    flex: none;
+    margin-top: 3px;
+    color: var(--accent);
+  }
+
+  .card-foot {
+    margin-top: auto;
+    padding-top: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .price {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .price small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1020px) {
+    .cards {
+      grid-template-columns: 1fr;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+  }
+</style>

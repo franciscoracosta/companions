@@ -1,0 +1,357 @@
+---
+import Robot from './Robot.astro';
+import type { Locale } from '../config';
+import { href, t } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const d = t(locale);
+const chips = [
+  { text: d.marquee[0], color: 'var(--coral)', icon: 'M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z' },
+  { text: d.marquee[2], color: 'var(--sky)', icon: 'M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z' },
+  { text: d.marquee[1], color: 'var(--sun)', icon: 'M12 7v5l3 2M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18z' },
+];
+---
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="blob blob--1"></span>
+    <span class="blob blob--2"></span>
+    <span class="blob blob--3"></span>
+    <span class="grid"></span>
+  </div>
+
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="badge" data-hero><span class="dot"></span>{d.hero.badge}</span>
+      <h1>
+        <span class="line" data-hero>{d.hero.titleA}</span>
+        <span class="line accent" data-hero>
+          {d.hero.titleB}
+          <svg class="squiggle" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 14C40 4 70 4 100 12s60 8 100-2 70-6 98 2" /></svg>
+        </span>
+      </h1>
+      <p class="sub" data-hero>{d.hero.subtitle}</p>
+      <div class="ctas" data-hero>
+        <a href={href(locale, undefined, 'preorder')} class="btn btn--coral">
+          {d.hero.cta}
+          <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </a>
+        <a href={href(locale, undefined, 'robots')} class="btn btn--ghost">{d.hero.secondary}</a>
+      </div>
+      <p class="note" data-hero>
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="var(--mint)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        {d.hero.note}
+      </p>
+    </div>
+
+    <div class="stage" data-stage>
+      <div class="stage-disc" aria-hidden="true"></div>
+      <div class="bot bot--care" data-bot><Robot variant="care" label={d.lines.items.care.name} /></div>
+      <div class="bot bot--play" data-bot><Robot variant="play" label={d.lines.items.play.name} /></div>
+      <div class="bot bot--guard" data-bot><Robot variant="guard" label={d.lines.items.guard.name} /></div>
+
+      {chips.map((c, i) => (
+        <div class={`chip chip--${i + 1}`} data-chip aria-hidden="true">
+          <span class="chip-icon" style={`background:${c.color}`}>
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d={c.icon} fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </span>
+          {c.text}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-block: 130px 80px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+  }
+
+  .blob--1 {
+    width: 520px;
+    height: 520px;
+    background: var(--coral-soft);
+    right: -120px;
+    top: -80px;
+  }
+
+  .blob--2 {
+    width: 420px;
+    height: 420px;
+    background: var(--sky-soft);
+    left: -160px;
+    bottom: -120px;
+  }
+
+  .blob--3 {
+    width: 360px;
+    height: 360px;
+    background: var(--sun-soft);
+    right: 30%;
+    bottom: -140px;
+  }
+
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(27, 26, 46, 0.09) 1px, transparent 1px);
+    background-size: 26px 26px;
+    mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 65%);
+    -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 65%);
+  }
+
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px 8px 12px;
+    border-radius: 999px;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--mint);
+    box-shadow: 0 0 0 0 rgba(47, 197, 154, 0.6);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    70% {
+      box-shadow: 0 0 0 10px rgba(47, 197, 154, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(47, 197, 154, 0);
+    }
+  }
+
+  h1 {
+    font-size: clamp(46px, 6.4vw, 92px);
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    margin-top: 26px;
+  }
+
+  .line {
+    display: block;
+  }
+
+  .accent {
+    position: relative;
+    display: inline-block;
+    color: var(--coral);
+  }
+
+  .squiggle {
+    position: absolute;
+    left: 0;
+    bottom: -0.16em;
+    width: 100%;
+    height: 0.22em;
+  }
+
+  .squiggle path {
+    fill: none;
+    stroke: var(--sun);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: 340;
+    stroke-dashoffset: 340;
+    animation: draw 1.2s 0.9s var(--ease) forwards;
+  }
+
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .sub {
+    margin-top: 30px;
+    font-size: clamp(18px, 1.6vw, 21px);
+    color: var(--ink-2);
+    max-width: 48ch;
+  }
+
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+
+  .stage {
+    position: relative;
+    aspect-ratio: 1 / 0.92;
+    width: 100%;
+  }
+
+  .stage-disc {
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    bottom: 4%;
+    height: 22%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 70%);
+  }
+
+  .bot {
+    position: absolute;
+    bottom: 8%;
+  }
+
+  .bot--play {
+    left: 30%;
+    width: 40%;
+    z-index: 2;
+  }
+
+  .bot--care {
+    left: 2%;
+    width: 31%;
+    bottom: 12%;
+  }
+
+  .bot--guard {
+    right: 2%;
+    width: 31%;
+    bottom: 12%;
+  }
+
+  .bot--care :global(.r-body),
+  .bot--care :global(.r-leg),
+  .bot--care :global(.r-shadow) {
+    animation-delay: -0.5s;
+  }
+
+  .bot--guard :global(.r-body),
+  .bot--guard :global(.r-leg),
+  .bot--guard :global(.r-shadow) {
+    animation-delay: -1.1s;
+  }
+
+  .chip {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px 8px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    animation: float 5s ease-in-out infinite;
+    z-index: 3;
+  }
+
+  .chip-icon {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+
+  .chip--1 {
+    left: -4%;
+    top: 14%;
+  }
+
+  .chip--2 {
+    right: -2%;
+    top: 4%;
+    animation-delay: -1.6s;
+  }
+
+  .chip--3 {
+    right: 4%;
+    bottom: 0;
+    animation-delay: -3.2s;
+  }
+
+  @media (max-width: 960px) {
+    .hero {
+      min-height: auto;
+      padding-top: 120px;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .stage {
+      max-width: 560px;
+      margin-inline: auto;
+    }
+
+    .chip--1 {
+      left: 0;
+    }
+
+    .chip--2 {
+      right: 0;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .chip {
+      font-size: 12px;
+      padding: 6px 12px 6px 6px;
+    }
+
+    .chip-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+</style>

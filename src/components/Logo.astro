@@ -1,0 +1,21 @@
+---
+import { brand } from '../config';
+
+interface Props {
+  class?: string;
+}
+
+const { class: cls = '' } = Astro.props;
+---
+
+<span class:list={['logo', cls]}>
+  <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true">
+    <rect x="21.5" y="1" width="5" height="9" rx="2.5" fill="currentColor" />
+    <circle cx="24" cy="3.5" r="3.5" fill="var(--sun)" />
+    <rect x="3" y="8" width="42" height="38" rx="17" fill="var(--coral)" />
+    <rect x="9" y="15" width="30" height="20" rx="10" fill="currentColor" />
+    <rect class="logo-eye" x="15" y="19.5" width="5.5" height="9" rx="2.75" fill="var(--eye)" />
+    <rect class="logo-eye" x="27.5" y="19.5" width="5.5" height="9" rx="2.75" fill="var(--eye)" />
+  </svg>
+  <span class="logo-word">{brand.name.toLowerCase()}</span>
+</span>
