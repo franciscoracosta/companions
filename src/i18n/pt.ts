@@ -93,6 +93,7 @@ const pt = {
     consent: 'Ao continuar, aceita a nossa',
     consentLink: 'Política de Privacidade',
     success: 'Obrigado! Está na lista. Vamos enviar-lhe novidades em breve.',
+    error: 'Não foi possível guardar o seu pedido. Tente novamente daqui a pouco.',
     perks: ['Preço de lançamento garantido', 'Acesso prioritário ao programa beta', 'Capa exclusiva da primeira série'],
   },
   faq: {

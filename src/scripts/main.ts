@@ -48,22 +48,48 @@ if (finePointer && !reduced) {
   });
 }
 
-// Pre-order form: no backend yet. TODO: POST to an API route that adds the contact to Resend.
+// Pre-order form: posts to /api/preorder, which stores the contact in Resend and emails a confirmation.
 const form = document.querySelector<HTMLFormElement>('[data-preorder]');
-form?.addEventListener('submit', (e) => {
+form?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = form.elements.namedItem('email') as HTMLInputElement;
+  const success = form.querySelector<HTMLElement>('[data-success]');
+  const error = form.querySelector<HTMLElement>('[data-error]');
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
   if (!email.checkValidity()) {
     email.setAttribute('aria-invalid', 'true');
     email.focus();
     return;
   }
   email.removeAttribute('aria-invalid');
-  const success = form.querySelector<HTMLElement>('[data-success]');
-  if (success) {
-    success.hidden = false;
-    if (!reduced) gsap.from(success, { y: 10, opacity: 0, duration: 0.5, ease: 'power3.out' });
+  if (error) error.hidden = true;
+  button?.setAttribute('aria-busy', 'true');
+
+  const fields = new FormData(form);
+  let ok = false;
+  try {
+    const res = await fetch('/api/preorder', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        email: email.value,
+        model: fields.get('model'),
+        company: fields.get('company'),
+        locale: form.dataset.locale,
+      }),
+    });
+    ok = res.ok;
+  } catch {
+    ok = false;
   }
+  button?.removeAttribute('aria-busy');
+
+  const shown = ok ? success : error;
+  if (shown) {
+    shown.hidden = false;
+    if (!reduced) gsap.from(shown, { y: 10, opacity: 0, duration: 0.5, ease: 'power3.out' });
+  }
+  if (ok) form.reset();
 });
 
 // "Pre-order" buttons on product cards preselect that model.

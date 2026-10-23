@@ -94,6 +94,7 @@ const es: Dict = {
     consent: 'Al continuar, aceptas nuestra',
     consentLink: 'Política de Privacidad',
     success: '¡Gracias! Ya estás en la lista. Pronto te enviaremos novedades.',
+    error: 'No hemos podido guardar tu solicitud. Inténtalo de nuevo en un momento.',
     perks: ['Precio de lanzamiento garantizado', 'Acceso prioritario al programa beta', 'Carcasa exclusiva de la primera serie'],
   },
   faq: {

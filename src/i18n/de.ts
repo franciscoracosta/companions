@@ -94,6 +94,7 @@ const de: Dict = {
     consent: 'Mit dem Fortfahren akzeptieren Sie unsere',
     consentLink: 'Datenschutzerklärung',
     success: 'Danke! Sie stehen auf der Liste. Wir melden uns bald.',
+    error: 'Ihre Anfrage konnte nicht gespeichert werden. Bitte versuchen Sie es gleich noch einmal.',
     perks: ['Garantierter Einführungspreis', 'Vorrangiger Zugang zum Beta-Programm', 'Exklusive Hülle der ersten Serie'],
   },
   faq: {

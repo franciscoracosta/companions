@@ -94,6 +94,7 @@ const en: Dict = {
     consent: 'By continuing you accept our',
     consentLink: 'Privacy Policy',
     success: "Thank you! You're on the list. We'll be in touch soon.",
+    error: "We couldn't save your request. Please try again in a moment.",
     perks: ['Launch price locked in', 'Priority access to the beta programme', 'Exclusive first-batch shell'],
   },
   faq: {
