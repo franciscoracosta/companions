@@ -1,0 +1,103 @@
+<!--
+  Wobi with wheels hidden in its feet (placeholder shapes until the real shell exists in Onshape).
+  Wheels drive it; two servos sway the upper body so it waddles; two servos move the head.
+  Sizes in metres, about 22 cm tall.
+-->
+<mujoco model="wobi_wheels">
+  <compiler angle="radian" autolimits="true"/>
+  <option timestep="0.002" integrator="implicitfast"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.35 0.35 0.35" specular="0 0 0"/>
+    <global azimuth="135" elevation="-20" offwidth="1280" offheight="720"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="1 1 1" rgb2="1 1 1" width="800" height="800"/>
+    <texture type="2d" name="grid" builtin="checker" mark="edge" rgb1="1 1 1" rgb2="1 1 1" markrgb="0.6 0.6 0.6" width="300" height="300"/>
+    <material name="floor" texture="grid" texuniform="true" texrepeat="4 4"/>
+    <material name="shell" rgba="0.96 0.95 0.92 1"/>
+    <material name="accent" rgba="0.98 0.62 0.18 1"/>
+    <material name="dark" rgba="0.08 0.09 0.12 1"/>
+    <material name="wheel" rgba="0.2 0.2 0.22 1"/>
+  </asset>
+
+  <default>
+    <geom contype="1" conaffinity="1" friction="0.9 0.01 0.001"/>
+    <default class="visual">
+      <geom contype="0" conaffinity="0" density="0"/>
+    </default>
+    <default class="servo">
+      <!-- small hobby servo: stiff position control, limited torque -->
+      <position kp="4" kv="0.08" forcerange="-0.6 0.6"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <light pos="0 0 3" dir="0 0 -1" directional="true" diffuse="0.5 0.5 0.5"/>
+    <geom name="floor" type="plane" size="0 0 0.05" material="floor"/>
+
+    <body name="chassis" pos="0 0 0.03">
+      <freejoint name="root"/>
+      <!-- battery and motors sit low: most of the mass is here -->
+      <geom name="chassis" type="box" size="0.05 0.04 0.012" pos="0 0 0.005" mass="0.35" material="dark"/>
+      <geom name="foot_left" class="visual" type="box" size="0.06 0.022 0.016" pos="0 0.05 0.002" material="accent"/>
+      <geom name="foot_right" class="visual" type="box" size="0.06 0.022 0.016" pos="0 -0.05 0.002" material="accent"/>
+      <!-- front and rear support balls, 1.5 mm above the floor so the wheels always carry the weight -->
+      <geom name="caster_front" type="sphere" size="0.012" pos="0.045 0 -0.0165" mass="0.01" friction="0.02 0.001 0.0001" material="dark"/>
+      <geom name="caster_rear" type="sphere" size="0.012" pos="-0.045 0 -0.0165" mass="0.01" friction="0.02 0.001 0.0001" material="dark"/>
+      <site name="imu" pos="0 0 0.01"/>
+
+      <body name="wheel_left" pos="0 0.05 0">
+        <joint name="wheel_left" type="hinge" axis="0 1 0" damping="0.001"/>
+        <geom name="wheel_left" type="cylinder" size="0.03 0.008" zaxis="0 1 0" mass="0.03" material="wheel" friction="1.2 0.01 0.001"/>
+      </body>
+      <body name="wheel_right" pos="0 -0.05 0">
+        <joint name="wheel_right" type="hinge" axis="0 1 0" damping="0.001"/>
+        <geom name="wheel_right" type="cylinder" size="0.03 0.008" zaxis="0 1 0" mass="0.03" material="wheel" friction="1.2 0.01 0.001"/>
+      </body>
+
+      <!-- upper body sways on two servos: roll (side to side) and pitch (lean) -->
+      <body name="hips" pos="0 0 0.022">
+        <joint name="body_roll" type="hinge" axis="1 0 0" range="-0.35 0.35" damping="0.02"/>
+        <geom type="cylinder" size="0.012 0.03" zaxis="1 0 0" mass="0.02" contype="0" conaffinity="0" material="dark"/>
+        <body name="torso" pos="0 0 0">
+          <joint name="body_pitch" type="hinge" axis="0 1 0" range="-0.3 0.3" damping="0.02"/>
+          <geom name="torso" type="ellipsoid" size="0.055 0.06 0.06" pos="0 0 0.065" mass="0.18" material="shell"/>
+          <geom class="visual" type="ellipsoid" size="0.04 0.045 0.035" pos="0.02 0 0.06" material="accent"/>
+
+          <body name="neck" pos="0.005 0 0.12">
+            <joint name="head_yaw" type="hinge" axis="0 0 1" range="-1.2 1.2" damping="0.01"/>
+            <geom type="cylinder" size="0.015 0.012" mass="0.01" contype="0" conaffinity="0" material="dark"/>
+            <body name="head" pos="0 0 0.012">
+              <joint name="head_pitch" type="hinge" axis="0 1 0" range="-0.5 0.5" damping="0.01"/>
+              <geom name="head" type="ellipsoid" size="0.06 0.07 0.05" pos="0.01 0 0.045" mass="0.12" material="shell"/>
+              <!-- round LCD eyes and camera -->
+              <geom class="visual" type="cylinder" size="0.018 0.003" pos="0.066 0.026 0.05" zaxis="1 0 0" material="dark"/>
+              <geom class="visual" type="cylinder" size="0.018 0.003" pos="0.066 -0.026 0.05" zaxis="1 0 0" material="dark"/>
+              <geom class="visual" type="sphere" size="0.006" pos="0.068 0.03 0.056" rgba="1 1 1 1"/>
+              <geom class="visual" type="sphere" size="0.006" pos="0.068 -0.022 0.056" rgba="1 1 1 1"/>
+              <geom class="visual" type="sphere" size="0.005" pos="0.068 0 0.075" material="dark"/>
+              <camera name="eyes" pos="0.07 0 0.075" xyaxes="0 -1 0 0 0 1" fovy="70"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <!-- N20 gear motors with encoders, speed-controlled -->
+    <velocity name="wheel_left" joint="wheel_left" kv="0.3" forcerange="-0.25 0.25"/>
+    <velocity name="wheel_right" joint="wheel_right" kv="0.3" forcerange="-0.25 0.25"/>
+    <position name="body_roll" joint="body_roll" class="servo"/>
+    <position name="body_pitch" joint="body_pitch" class="servo"/>
+    <position name="head_yaw" joint="head_yaw" class="servo"/>
+    <position name="head_pitch" joint="head_pitch" class="servo"/>
+  </actuator>
+
+  <sensor>
+    <gyro name="gyro" site="imu"/>
+    <accelerometer name="accelerometer" site="imu"/>
+  </sensor>
+</mujoco>

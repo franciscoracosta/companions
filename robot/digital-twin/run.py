@@ -3,6 +3,9 @@
   python run.py view                 interactive 3D window, drive with the keyboard
   python run.py record -o demo.mp4   headless video of a scripted mission
   python run.py test                 smoke test: stands, walks, turns, never falls
+
+  --robot wobi   (default) Wobi with wheels in its feet and a waddling body, no learning
+  --robot duck   Open Duck Mini v2 biped with the pretrained walking policy
 """
 
 import argparse
@@ -14,6 +17,7 @@ import mujoco
 import numpy as np
 
 from wobi_twin.twin import SIM_DT, VX_RANGE, VY_RANGE, WZ_RANGE, Command, DuckTwin
+from wobi_twin.wheels import WobiWheelsTwin
 
 # Scripted mission: (seconds, command, label). Patrol-style loop.
 MISSION = [
@@ -23,14 +27,19 @@ MISSION = [
     (2.5, Command(head_yaw=1.0), "look left"),
     (2.5, Command(head_yaw=-1.0), "look right"),
     (5.0, Command(vx=0.15), "walk back"),
-    (2.0, Command(vy=0.2), "side step"),
 ]
+
+TRACKED_BODY = {"wobi": "chassis", "duck": "trunk_assembly"}
+
+
+def make_twin(args):
+    return WobiWheelsTwin() if args.robot == "wobi" else DuckTwin(args.scene)
 
 
 def view(args):
     import mujoco.viewer
 
-    twin = DuckTwin(args.scene)
+    twin = make_twin(args)
     head_mode = False
 
     def on_key(key):
@@ -65,14 +74,14 @@ def view(args):
 def record(args):
     import imageio.v2 as imageio
 
-    twin = DuckTwin(args.scene)
+    twin = make_twin(args)
     twin.model.vis.global_.offwidth = max(args.width, twin.model.vis.global_.offwidth)
     twin.model.vis.global_.offheight = max(args.height, twin.model.vis.global_.offheight)
     renderer = mujoco.Renderer(twin.model, args.height, args.width)
     camera = mujoco.MjvCamera()
     camera.type = mujoco.mjtCamera.mjCAMERA_TRACKING
-    camera.trackbodyid = twin.model.body("trunk_assembly").id
-    camera.distance, camera.elevation, camera.azimuth = 0.9, -18, 135
+    camera.trackbodyid = twin.model.body(TRACKED_BODY[args.robot]).id
+    camera.distance, camera.elevation, camera.azimuth = (0.6 if args.robot == "wobi" else 0.9), -18, 135
     every = int(1 / (args.fps * SIM_DT))
     log = []
 
@@ -95,7 +104,7 @@ def record(args):
 
 
 def test(args):
-    twin = DuckTwin(args.scene)
+    twin = make_twin(args)
     failures = []
     twin.run_for(2.0)
     if twin.state().fallen:
@@ -110,6 +119,15 @@ def test(args):
     twin.run_for(4.0)
     if twin.state().fallen:
         failures.append("falls while turning")
+    if args.robot == "wobi":
+        # sharp manoeuvres: fast curves, reversing, spinning, sudden stops
+        for c in [Command(vx=0.3, wz=2), Command(vx=-0.2, wz=-1.5), Command(wz=2), Command(), Command(vx=0.3), Command()]:
+            twin.command = c
+            for _ in range(30):
+                twin.run_for(0.1)
+                if twin.state().fallen:
+                    failures.append(f"falls with vx={c.vx} wz={c.wz}")
+                    break
     print("FAIL: " + "; ".join(failures) if failures else f"OK: walked {walked[0]:.2f} m, turned, stayed upright")
     return 1 if failures else 0
 
@@ -117,7 +135,8 @@ def test(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("mode", choices=["view", "record", "test"])
-    parser.add_argument("--scene", default="flat", choices=["flat", "flat_backlash"])
+    parser.add_argument("--robot", default="wobi", choices=["wobi", "duck"])
+    parser.add_argument("--scene", default="flat", choices=["flat", "flat_backlash"], help="duck only")
     parser.add_argument("-o", "--output", default="wobi_twin_demo.mp4")
     parser.add_argument("--telemetry", help="also write the mission's states as JSON")
     parser.add_argument("--width", type=int, default=960)
