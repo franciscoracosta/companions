@@ -22,7 +22,7 @@ const fr: Dict = {
   lines: {
     eyebrow: 'Une famille, trois missions',
     title: `Choisissez le bon ${B} pour ceux que vous aimez.`,
-    subtitle: "Ils partagent tous le même cœur : un corps qui marche et réagit, des yeux expressifs et une IA qui apprend les habitudes de la maison. Seule la mission change.",
+    subtitle: "Ils partagent tous le même cœur : un corps qui roule, se dandine et réagit, des yeux expressifs et une IA qui apprend les habitudes de la maison. Seule la mission change.",
     from: 'dès',
     items: {
       care: {
@@ -58,7 +58,7 @@ const fr: Dict = {
     subtitle: `Chaque ${B} associe robotique de précision et IA embarquée, pour réagir vite et garder vos données à la maison.`,
     items: [
       { title: 'IA embarquée', text: "Vision et voix traitées localement. Les images ne quittent jamais la maison sans votre accord." },
-      { title: "Marche et garde l'équilibre", text: 'Des jambes à moteurs de précision et un équilibre actif pour se déplacer naturellement dans la maison.' },
+      { title: 'Roule et se dandine', text: 'Des roues cachées dans les pieds et un balancement de pingouin pour se promener dans la maison avec personnalité.' },
       { title: 'Une appli pour toute la famille', text: 'Alertes, routines et réglages dans une seule appli, partagée avec ceux qui doivent savoir.' },
       { title: 'Conçu pour durer', text: 'Pièces modulaires, remplaçables et imprimées en 3D. Mises à jour gratuites pendant toute sa durée de vie.' },
     ],
@@ -75,7 +75,7 @@ const fr: Dict = {
     eyebrow: 'Calendrier',
     title: "Du prototype jusqu'à chez vous.",
     steps: [
-      { date: '2026', title: 'Prototype fonctionnel', text: `Les premiers ${B} marchent, voient et parlent dans notre laboratoire.`, done: true },
+      { date: '2026', title: 'Prototype fonctionnel', text: `Les premiers ${B} roulent, voient et parlent dans notre laboratoire.`, done: true },
       { date: 'Maintenant', title: 'Précommandes ouvertes', text: 'Réservez votre place dans la première série avec un acompte remboursable.', done: true },
       { date: 'T2 2027', title: 'Programme bêta', text: `Des familles sélectionnées testent ${B} chez elles et nous aident à peaufiner chaque détail.`, done: false },
       { date: 'T4 2027', title: 'Premières livraisons', text: `Les premiers ${B} arrivent chez ceux qui ont réservé en premier.`, done: false },

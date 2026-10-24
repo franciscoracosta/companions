@@ -22,7 +22,7 @@ const it: Dict = {
   lines: {
     eyebrow: 'Una famiglia, tre missioni',
     title: `Scegli il ${B} giusto per chi ami.`,
-    subtitle: 'Hanno tutti lo stesso cuore: un corpo che cammina e reagisce, occhi espressivi e un\'IA che impara le abitudini di casa. Cambia solo la missione.',
+    subtitle: 'Hanno tutti lo stesso cuore: un corpo che rotola, ondeggia e reagisce, occhi espressivi e un\'IA che impara le abitudini di casa. Cambia solo la missione.',
     from: 'da',
     items: {
       care: {
@@ -58,7 +58,7 @@ const it: Dict = {
     subtitle: `Ogni ${B} unisce robotica di precisione e IA che gira direttamente sul robot, per rispondere in fretta e tenere i tuoi dati in casa.`,
     items: [
       { title: 'IA a bordo', text: 'Visione e voce elaborate in locale. Le immagini non escono mai di casa senza il tuo permesso.' },
-      { title: 'Cammina e sta in equilibrio', text: 'Gambe con motori di precisione ed equilibrio attivo per muoversi in casa con naturalezza.' },
+      { title: 'Rotola e ondeggia', text: 'Ruote nascoste nei piedi e un dondolio da pinguino per girare per casa con personalità.' },
       { title: "Un'app per tutta la famiglia", text: "Avvisi, routine e impostazioni in un'unica app, condivisa con chi deve sapere." },
       { title: 'Fatto per durare', text: 'Parti modulari, sostituibili e stampate in 3D. Aggiornamenti gratuiti per tutta la sua vita.' },
     ],
@@ -75,7 +75,7 @@ const it: Dict = {
     eyebrow: 'Tappe',
     title: 'Dal prototipo a casa tua.',
     steps: [
-      { date: '2026', title: 'Prototipo funzionante', text: `I primi ${B} camminano, vedono e parlano nel nostro laboratorio.`, done: true },
+      { date: '2026', title: 'Prototipo funzionante', text: `I primi ${B} rotolano, vedono e parlano nel nostro laboratorio.`, done: true },
       { date: 'Ora', title: 'Preordini aperti', text: 'Assicurati un posto nella prima serie con un acconto rimborsabile.', done: true },
       { date: 'T2 2027', title: 'Programma beta', text: `Famiglie selezionate provano ${B} a casa e ci aiutano a perfezionare ogni dettaglio.`, done: false },
       { date: 'T4 2027', title: 'Prime consegne', text: `I primi ${B} arrivano a casa di chi ha prenotato per primo.`, done: false },

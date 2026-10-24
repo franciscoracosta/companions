@@ -22,7 +22,7 @@ const en: Dict = {
   lines: {
     eyebrow: 'One family, three missions',
     title: `Pick the right ${B} for the people you love.`,
-    subtitle: 'They all share the same heart: a body that walks and reacts, expressive eyes and an AI that learns how your home works. What changes is the mission.',
+    subtitle: 'They all share the same heart: a body that rolls, sways and reacts, expressive eyes and an AI that learns how your home works. What changes is the mission.',
     from: 'from',
     items: {
       care: {
@@ -58,7 +58,7 @@ const en: Dict = {
     subtitle: `Every ${B} combines precision robotics with AI that runs on the robot itself, so it responds fast and keeps your data at home.`,
     items: [
       { title: 'On-device AI', text: 'Vision and voice are processed locally. Images never leave your home without permission.' },
-      { title: 'Walks and balances', text: 'Legs with precision motors and active balance, so it moves around the house naturally.' },
+      { title: 'Rolls and waddles', text: 'Wheels hidden in its feet and a gentle penguin sway, so it glides around the house with personality.' },
       { title: 'One app for the family', text: 'Alerts, routines and settings in a single app, shared with everyone who needs to know.' },
       { title: 'Built to last', text: 'Modular, replaceable, 3D-printed parts. Free updates for its entire lifetime.' },
     ],
@@ -75,7 +75,7 @@ const en: Dict = {
     eyebrow: 'Timeline',
     title: 'From prototype to your home.',
     steps: [
-      { date: '2026', title: 'Working prototype', text: `The first ${B} robots walk, see and talk in our lab.`, done: true },
+      { date: '2026', title: 'Working prototype', text: `The first ${B} robots roll, see and talk in our lab.`, done: true },
       { date: 'Now', title: 'Pre-orders open', text: 'Secure your spot in the first batch with a refundable deposit.', done: true },
       { date: 'Q2 2027', title: 'Beta programme', text: `Selected families test ${B} at home and help us fine-tune every detail.`, done: false },
       { date: 'Q4 2027', title: 'First deliveries', text: `The first ${B} robots arrive at the homes of the earliest backers.`, done: false },

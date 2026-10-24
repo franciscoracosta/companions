@@ -22,7 +22,7 @@ const de: Dict = {
   lines: {
     eyebrow: 'Eine Familie, drei Aufgaben',
     title: `Finden Sie den richtigen ${B} für Ihre Liebsten.`,
-    subtitle: 'Alle haben dasselbe Herz: einen Körper, der läuft und reagiert, ausdrucksstarke Augen und eine KI, die den Alltag zu Hause lernt. Nur die Aufgabe ist eine andere.',
+    subtitle: 'Alle haben dasselbe Herz: einen Körper, der rollt, watschelt und reagiert, ausdrucksstarke Augen und eine KI, die den Alltag zu Hause lernt. Nur die Aufgabe ist eine andere.',
     from: 'ab',
     items: {
       care: {
@@ -58,7 +58,7 @@ const de: Dict = {
     subtitle: `Jeder ${B} verbindet Präzisionsrobotik mit KI, die direkt im Roboter läuft. So reagiert er schnell und Ihre Daten bleiben zu Hause.`,
     items: [
       { title: 'KI direkt im Roboter', text: 'Bild und Sprache werden lokal verarbeitet. Aufnahmen verlassen das Haus nie ohne Ihre Erlaubnis.' },
-      { title: 'Läuft und balanciert', text: 'Beine mit Präzisionsmotoren und aktiver Balance für natürliche Bewegung im ganzen Haus.' },
+      { title: 'Rollt und watschelt', text: 'In den Füßen versteckte Räder und ein Pinguin-Watscheln für Bewegung mit Persönlichkeit im ganzen Haus.' },
       { title: 'Eine App für die Familie', text: 'Warnungen, Routinen und Einstellungen in einer App, geteilt mit allen, die Bescheid wissen müssen.' },
       { title: 'Gebaut für die Dauer', text: 'Modulare, austauschbare, 3D-gedruckte Teile. Kostenlose Updates ein Leben lang.' },
     ],
@@ -75,7 +75,7 @@ const de: Dict = {
     eyebrow: 'Zeitplan',
     title: 'Vom Prototyp zu Ihnen nach Hause.',
     steps: [
-      { date: '2026', title: 'Funktionierender Prototyp', text: `Die ersten ${B} laufen, sehen und sprechen in unserem Labor.`, done: true },
+      { date: '2026', title: 'Funktionierender Prototyp', text: `Die ersten ${B} rollen, sehen und sprechen in unserem Labor.`, done: true },
       { date: 'Jetzt', title: 'Vorbestellung offen', text: 'Sichern Sie sich mit einer erstattbaren Anzahlung einen Platz in der ersten Serie.', done: true },
       { date: 'Q2 2027', title: 'Beta-Programm', text: `Ausgewählte Familien testen ${B} zu Hause und helfen uns, jedes Detail zu verfeinern.`, done: false },
       { date: 'Q4 2027', title: 'Erste Auslieferungen', text: `Die ersten ${B} ziehen bei den frühesten Unterstützern ein.`, done: false },
