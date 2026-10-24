@@ -229,13 +229,15 @@ p {
   animation: blink 5s infinite;
 }
 
-/* Robot */
+/* Robot: owl-like companion. The feet hide wheels, so the body sways like a penguin while the feet stay down. */
 .robot {
   --r-main: var(--coral);
   --r-light: #ff9a7f;
+  --r-deep: #d9472a;
   --r-dark: #2a2840;
   --r-eye: var(--eye);
   --r-accent: var(--sun);
+  --r-face: #fff4e6;
   --ex: 0px;
   --ey: 0px;
   overflow: visible;
@@ -244,18 +246,21 @@ p {
 .robot--care {
   --r-main: #ff6b4a;
   --r-light: #ffa48c;
+  --r-deep: #e04f2f;
   --r-accent: #ffd1c4;
 }
 
 .robot--guard {
   --r-main: #3d8bff;
   --r-light: #8fc0ff;
+  --r-deep: #1f63d6;
   --r-accent: #ffb627;
 }
 
 .robot--play {
   --r-main: #ffb627;
   --r-light: #ffd978;
+  --r-deep: #e08e00;
   --r-accent: #ff6b4a;
 }
 
@@ -274,6 +279,12 @@ p {
   fill: var(--r-dark);
 }
 
+.r-toe {
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
 .r-shell {
   stroke: rgba(27, 26, 46, 0.08);
   stroke-width: 1.5;
@@ -284,9 +295,22 @@ p {
   opacity: 0.35;
 }
 
+.r-belly,
+.r-screen {
+  fill: var(--r-face);
+}
+
+.r-feather {
+  fill: none;
+  stroke: color-mix(in srgb, var(--r-main) 35%, transparent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .r-arm {
-  fill: var(--r-main);
-  transform-origin: 50% 15%;
+  fill: var(--r-deep);
+  transform-origin: 50% 10%;
 }
 
 .r-arm--l {
@@ -301,7 +325,13 @@ p {
   animation: wave 1.4s ease-in-out infinite;
 }
 
-.r-screen {
+/* The head turns and tilts on its neck now and then, like an owl */
+.r-head {
+  transform-origin: 50% 100%;
+  animation: look 7s ease-in-out infinite;
+}
+
+.r-socket {
   fill: var(--ink);
 }
 
@@ -311,87 +341,82 @@ p {
 }
 
 .r-eye {
-  fill: var(--r-eye);
   transform-origin: center;
   animation: blink 4.6s infinite;
 }
 
-.r-mouth {
-  fill: none;
-  stroke: var(--r-eye);
-  stroke-width: 3.5;
-  stroke-linecap: round;
+.r-iris {
+  fill: var(--r-eye);
+}
+
+.r-pupil {
+  fill: var(--ink);
+}
+
+.r-glint {
+  fill: #fff;
+}
+
+.r-beak {
+  fill: #ff8a3d;
+  stroke: rgba(27, 26, 46, 0.08);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.robot--play .r-beak {
+  fill: #ff6b4a;
 }
 
 .r-cheek {
   fill: #ff8fa3;
-  opacity: 0.55;
-}
-
-.robot--care .r-cheek {
-  fill: #fff;
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .r-emblem path {
-  fill: #fff;
-  opacity: 0.9;
+  fill: var(--r-main);
+}
+
+.r-ear {
+  fill: var(--r-deep);
 }
 
 .r-tip {
   fill: var(--r-accent);
 }
 
-.robot--care .r-tip {
-  fill: #fff;
-  stroke: var(--r-main);
-  stroke-width: 3;
-}
-
 .r-tip--alt {
   fill: var(--sky);
 }
 
-.r-wave {
+.r-spring {
   fill: none;
-  stroke: var(--r-accent);
-  stroke-width: 3;
+  stroke: var(--r-deep);
+  stroke-width: 6;
   stroke-linecap: round;
-  animation: radar 1.8s ease-out infinite;
-}
-
-.r-prop {
-  transform-origin: center;
-  animation: spin 1.2s linear infinite;
 }
 
 .r-antenna {
   transform-origin: 50% 100%;
-  animation: antenna 3s ease-in-out infinite;
+  animation: antenna 1.6s ease-in-out infinite;
 }
 
-/* Waddle: body sways, legs alternate */
+.r-antenna--r {
+  animation-delay: -0.8s;
+}
+
+/* Waddle: the body sways side to side over the wheels */
 .r-body {
   transform-origin: 50% 100%;
   animation: sway 1.6s ease-in-out infinite;
-}
-
-.r-leg {
-  transform-origin: 50% 0%;
-}
-
-.r-leg--l {
-  animation: step-l 1.6s ease-in-out infinite;
-}
-
-.r-leg--r {
-  animation: step-r 1.6s ease-in-out infinite;
 }
 
 .robot--blueprint .r-shell,
 .robot--blueprint .r-arm,
 .robot--blueprint .r-limb,
 .robot--blueprint .r-foot,
+.robot--blueprint .r-ear,
+.robot--blueprint .r-socket,
 .robot--blueprint .r-tip {
   fill: none;
   stroke: var(--eye);
@@ -399,7 +424,8 @@ p {
   stroke-dasharray: 4 4;
 }
 
-.robot--blueprint .r-screen {
+.robot--blueprint .r-screen,
+.robot--blueprint .r-belly {
   fill: rgba(124, 243, 230, 0.08);
   stroke: var(--eye);
   stroke-width: 1.5;
@@ -407,50 +433,60 @@ p {
 
 .robot--blueprint .r-shine,
 .robot--blueprint .r-cheek,
-.robot--blueprint .r-shadow {
+.robot--blueprint .r-shadow,
+.robot--blueprint .r-feather,
+.robot--blueprint .r-glint {
   display: none;
 }
 
-.robot--blueprint .r-emblem path {
+.robot--blueprint .r-emblem path,
+.robot--blueprint .r-beak,
+.robot--blueprint .r-spring {
   fill: none;
   stroke: var(--eye);
+  stroke-width: 1.5;
+}
+
+.robot--blueprint .r-iris {
+  fill: rgba(124, 243, 230, 0.35);
+}
+
+.robot--blueprint .r-pupil {
+  fill: var(--eye);
 }
 
 @keyframes sway {
   0%,
   100% {
-    transform: rotate(-3deg) translateY(0);
+    transform: rotate(-4deg) translateY(0);
   }
   25% {
-    transform: rotate(0deg) translateY(-4px);
+    transform: rotate(0deg) translateY(-3px);
   }
   50% {
-    transform: rotate(3deg) translateY(0);
+    transform: rotate(4deg) translateY(0);
   }
   75% {
-    transform: rotate(0deg) translateY(-4px);
+    transform: rotate(0deg) translateY(-3px);
   }
 }
 
-@keyframes step-l {
+@keyframes look {
   0%,
-  50%,
+  30%,
   100% {
-    transform: translateY(0);
+    transform: rotate(0deg);
   }
-  25% {
-    transform: translateY(-7px);
+  38%,
+  52% {
+    transform: rotate(-9deg) translateX(-3px);
   }
-}
-
-@keyframes step-r {
-  0%,
-  50%,
-  100% {
-    transform: translateY(0);
+  60%,
+  72% {
+    transform: rotate(7deg) translateX(2px);
   }
-  75% {
-    transform: translateY(-7px);
+  80% {
+    transform: rotate(0deg);
   }
 }
 
@@ -462,7 +498,7 @@ p {
   }
   25%,
   75% {
-    transform: scaleX(0.9);
+    transform: scaleX(0.92);
   }
 }
 
@@ -503,34 +539,23 @@ p {
     transform: rotate(-20deg);
   }
   50% {
-    transform: rotate(-60deg);
+    transform: rotate(-55deg);
   }
 }
 
 @keyframes antenna {
   0%,
   100% {
-    transform: rotate(-6deg);
+    transform: rotate(-7deg);
   }
   50% {
-    transform: rotate(6deg);
+    transform: rotate(7deg);
   }
 }
 
 @keyframes spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes radar {
-  0% {
-    opacity: 1;
-    transform: scale(0.8);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.4);
   }
 }
 

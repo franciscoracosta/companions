@@ -10,12 +10,15 @@ const { class: cls = '' } = Astro.props;
 
 <span class:list={['logo', cls]}>
   <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true">
-    <rect x="21.5" y="1" width="5" height="9" rx="2.5" fill="currentColor" />
-    <circle cx="24" cy="3.5" r="3.5" fill="var(--sun)" />
-    <rect x="3" y="8" width="42" height="38" rx="17" fill="var(--coral)" />
-    <rect x="9" y="15" width="30" height="20" rx="10" fill="currentColor" />
-    <rect class="logo-eye" x="15" y="19.5" width="5.5" height="9" rx="2.75" fill="var(--eye)" />
-    <rect class="logo-eye" x="27.5" y="19.5" width="5.5" height="9" rx="2.75" fill="var(--eye)" />
+    <path d="M6 20 4 3l14 9zM42 20l2-17-14 9z" fill="#E04F2F" />
+    <rect x="3" y="7" width="42" height="38" rx="17" fill="#FF6B4A" />
+    <circle cx="16.5" cy="24" r="10" fill="#FFF4E6" />
+    <circle cx="31.5" cy="24" r="10" fill="#FFF4E6" />
+    <circle cx="16.5" cy="24" r="6.5" fill="#1B1A2E" />
+    <circle cx="31.5" cy="24" r="6.5" fill="#1B1A2E" />
+    <circle class="logo-eye" cx="16.5" cy="24" r="3.8" fill="#7CF3E6" />
+    <circle class="logo-eye" cx="31.5" cy="24" r="3.8" fill="#7CF3E6" />
+    <path d="M24 31l-3 3.5 3 4.5 3-4.5z" fill="#FFB627" />
   </svg>
   <span class="logo-word">{brand.name.toLowerCase()}</span>
 </span>
