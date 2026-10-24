@@ -1,0 +1,11 @@
+This folder includes material from the Open Duck Mini project (Apache License 2.0):
+
+- models/open_duck_mini_v2/  MJCF model and meshes, from github.com/apirrone/Open_Duck_Playground
+  (commit b9be205ac64488c23504ca42e5ec790337adeec3), playground/open_duck_mini_v2/xmls.
+  Changed: removed the rough-terrain scene, whose heightfield image is not in that repository.
+- policies/open_duck_walk.onnx  walking policy BEST_WALK_ONNX_2.onnx from github.com/apirrone/Open_Duck_Mini
+  (commit b23317a485b3cec7d8417f352478778b3475173c).
+- policies/reference_motion.pkl  playground/open_duck_mini_v2/data/polynomial_coefficients.pkl from Open_Duck_Playground.
+- wobi_twin/twin.py  a standalone port of playground/open_duck_mini_v2/mujoco_infer.py (no JAX).
+
+Copyright 2025 Antoine Pirrone, Steve Nguyen and contributors. See models/open_duck_mini_v2/LICENSE.
