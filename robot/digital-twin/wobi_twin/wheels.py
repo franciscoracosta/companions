@@ -1,4 +1,4 @@
-"""Digital twin of Wobi with wheels hidden in its feet.
+"""Digital twin of the Wobi owl, with wheels hidden in its feet.
 
 No learning: differential drive for moving, and a waddle drawn from simple sine waves so
 the body sways like a penguin while the wheels do the work. Same Command/State as DuckTwin.
@@ -25,10 +25,23 @@ MAX_ACCEL = 0.5  # m/s², so it never tips over when starting or stopping
 MAX_TURN_ACCEL = 4.0  # rad/s²
 MAX_LATERAL_ACCEL = 0.3  # m/s², slows down in tight fast curves
 
+# Line colours from the site (src/styles/global.css), as RGB 0-1.
+def _hex(h: str) -> list[float]:
+    return [int(h[i : i + 2], 16) / 255 for i in (1, 3, 5)] + [1.0]
+
+
+LINES = {
+    "care": {"main": "#ff6b4a", "deep": "#e04f2f", "accent": "#ffd1c4", "tip_alt": "#ffd1c4", "beak": "#ff8a3d"},
+    "guard": {"main": "#3d8bff", "deep": "#1f63d6", "accent": "#ffb627", "tip_alt": "#ffb627", "beak": "#ff8a3d"},
+    "play": {"main": "#ffb627", "deep": "#e08e00", "accent": "#ff6b4a", "tip_alt": "#3d8bff", "beak": "#ff6b4a"},
+}
+
 
 class WobiWheelsTwin:
-    def __init__(self):
+    def __init__(self, line: str = "care"):
+        self.line = line
         self.model = mujoco.MjModel.from_xml_path(str(MODEL))
+        self._dress(line)
         self.model.opt.timestep = SIM_DT
         self.data = mujoco.MjData(self.model)
         self.actuator_names = [self.model.actuator(i).name for i in range(self.model.nu)]
@@ -41,6 +54,16 @@ class WobiWheelsTwin:
         self._floor = self.model.geom("floor").id
         self.command = Command()
         self.reset()
+
+    def _dress(self, line: str) -> None:
+        """Paint the owl in its line's colours and keep only that line's ears."""
+        for material, colour in LINES[line].items():
+            self.model.mat_rgba[self.model.material(material).id] = _hex(colour)
+        for g in range(self.model.ngeom):
+            name = self.model.geom(g).name
+            if name.startswith("ear_") and not name.startswith(f"ear_{line}_"):
+                self.model.geom_matid[g] = -1
+                self.model.geom_rgba[g] = [0, 0, 0, 0]
 
     def reset(self) -> None:
         mujoco.mj_resetData(self.model, self.data)

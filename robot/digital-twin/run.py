@@ -4,7 +4,8 @@
   python run.py record -o demo.mp4   headless video of a scripted mission
   python run.py test                 smoke test: stands, walks, turns, never falls
 
-  --robot wobi   (default) Wobi with wheels in its feet and a waddling body, no learning
+  --robot wobi   (default) Wobi owl with wheels in its feet and a waddling body, no learning
+  --line care|guard|play   which Wobi: colours and ears of each line
   --robot duck   Open Duck Mini v2 biped with the pretrained walking policy
 """
 
@@ -24,8 +25,8 @@ MISSION = [
     (2.0, Command(), "stand"),
     (5.0, Command(vx=0.15), "walk forward"),
     (3.0, Command(wz=1.0), "turn left"),
-    (2.5, Command(head_yaw=1.0), "look left"),
-    (2.5, Command(head_yaw=-1.0), "look right"),
+    (2.5, Command(head_yaw=1.4), "look left"),
+    (2.5, Command(head_yaw=-1.4), "look right"),
     (5.0, Command(vx=0.15), "walk back"),
 ]
 
@@ -33,7 +34,7 @@ TRACKED_BODY = {"wobi": "chassis", "duck": "trunk_assembly"}
 
 
 def make_twin(args):
-    return WobiWheelsTwin() if args.robot == "wobi" else DuckTwin(args.scene)
+    return WobiWheelsTwin(args.line) if args.robot == "wobi" else DuckTwin(args.scene)
 
 
 def view(args):
@@ -51,7 +52,7 @@ def view(args):
         if key in arrows:
             fwd, side = arrows[key]
             if head_mode:
-                c.head_pitch, c.head_yaw = 0.6 * fwd, 1.0 * side
+                c.head_pitch, c.head_yaw = 0.4 * fwd, 1.4 * side
             else:
                 c.vx, c.vy = VX_RANGE[1] * fwd, VY_RANGE[1] * side
         if key == ord("Q"):
@@ -136,6 +137,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("mode", choices=["view", "record", "test"])
     parser.add_argument("--robot", default="wobi", choices=["wobi", "duck"])
+    parser.add_argument("--line", default="care", choices=["care", "guard", "play"], help="wobi only")
     parser.add_argument("--scene", default="flat", choices=["flat", "flat_backlash"], help="duck only")
     parser.add_argument("-o", "--output", default="wobi_twin_demo.mp4")
     parser.add_argument("--telemetry", help="also write the mission's states as JSON")

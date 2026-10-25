@@ -1,25 +1,38 @@
 <!--
-  Wobi with wheels hidden in its feet (placeholder shapes until the real shell exists in Onshape).
-  Wheels drive it; two servos sway the upper body so it waddles; two servos move the head.
+  Wobi owl with wheels hidden in its feet. Shapes follow the owl design on getwobi.com
+  (src/components/Robot.astro): big head on a neck that turns like an owl's, facial disc with
+  round LCD eyes, beak, wings, cream belly, dark feet. Placeholder primitives until the real
+  shell exists in Onshape. Wheels drive it, two servos sway the body, two servos move the head.
+  All three ear styles are here; WobiWheelsTwin(line=...) keeps one and sets that line's colours.
   Sizes in metres, about 22 cm tall.
 -->
-<mujoco model="wobi_wheels">
+<mujoco model="wobi_owl">
   <compiler angle="radian" autolimits="true"/>
   <option timestep="0.002" integrator="implicitfast"/>
 
   <visual>
-    <headlight diffuse="0.6 0.6 0.6" ambient="0.35 0.35 0.35" specular="0 0 0"/>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.4 0.4 0.4" specular="0 0 0"/>
     <global azimuth="135" elevation="-20" offwidth="1280" offheight="720"/>
   </visual>
 
   <asset>
-    <texture type="skybox" builtin="gradient" rgb1="1 1 1" rgb2="1 1 1" width="800" height="800"/>
-    <texture type="2d" name="grid" builtin="checker" mark="edge" rgb1="1 1 1" rgb2="1 1 1" markrgb="0.6 0.6 0.6" width="300" height="300"/>
+    <texture type="skybox" builtin="gradient" rgb1="1 0.97 0.95" rgb2="1 0.97 0.95" width="800" height="800"/>
+    <texture type="2d" name="grid" builtin="checker" mark="edge" rgb1="1 0.97 0.95" rgb2="1 0.97 0.95" markrgb="0.85 0.8 0.78" width="300" height="300"/>
     <material name="floor" texture="grid" texuniform="true" texrepeat="4 4"/>
-    <material name="shell" rgba="0.96 0.95 0.92 1"/>
-    <material name="accent" rgba="0.98 0.62 0.18 1"/>
-    <material name="dark" rgba="0.08 0.09 0.12 1"/>
-    <material name="wheel" rgba="0.2 0.2 0.22 1"/>
+    <!-- line colours (Care by default); WobiWheelsTwin rewrites main, deep, accent, tip_alt and beak -->
+    <material name="main" rgba="1 0.42 0.29 1"/>
+    <material name="deep" rgba="0.88 0.31 0.18 1"/>
+    <material name="accent" rgba="1 0.82 0.77 1"/>
+    <material name="tip_alt" rgba="1 0.82 0.77 1"/>
+    <material name="beak" rgba="1 0.54 0.24 1"/>
+    <!-- shared colours -->
+    <material name="face" rgba="1 0.96 0.9 1"/>
+    <material name="ink" rgba="0.106 0.102 0.18 1"/>
+    <material name="eye" rgba="0.49 0.95 0.9 1" emission="0.4"/>
+    <material name="foot" rgba="0.165 0.157 0.25 1"/>
+    <material name="cheek" rgba="1 0.76 0.8 1"/>
+    <material name="white" rgba="1 1 1 1" emission="0.5"/>
+    <material name="wheel" rgba="0.165 0.157 0.25 1"/>
   </asset>
 
   <default>
@@ -40,12 +53,13 @@
     <body name="chassis" pos="0 0 0.03">
       <freejoint name="root"/>
       <!-- battery and motors sit low: most of the mass is here -->
-      <geom name="chassis" type="box" size="0.05 0.04 0.012" pos="0 0 0.005" mass="0.35" material="dark"/>
-      <geom name="foot_left" class="visual" type="box" size="0.06 0.022 0.016" pos="0 0.05 0.002" material="accent"/>
-      <geom name="foot_right" class="visual" type="box" size="0.06 0.022 0.016" pos="0 -0.05 0.002" material="accent"/>
+      <geom name="chassis" type="box" size="0.05 0.04 0.012" pos="0 0 0.005" mass="0.35" material="foot"/>
+      <!-- the feet: dark domes that hide the wheels -->
+      <geom name="foot_left" class="visual" type="ellipsoid" size="0.045 0.022 0.034" pos="0 0.05 0" material="foot"/>
+      <geom name="foot_right" class="visual" type="ellipsoid" size="0.045 0.022 0.034" pos="0 -0.05 0" material="foot"/>
       <!-- front and rear support balls, 1.5 mm above the floor so the wheels always carry the weight -->
-      <geom name="caster_front" type="sphere" size="0.012" pos="0.045 0 -0.0165" mass="0.01" friction="0.02 0.001 0.0001" material="dark"/>
-      <geom name="caster_rear" type="sphere" size="0.012" pos="-0.045 0 -0.0165" mass="0.01" friction="0.02 0.001 0.0001" material="dark"/>
+      <geom name="caster_front" type="sphere" size="0.012" pos="0.045 0 -0.0165" mass="0.01" friction="0.02 0.001 0.0001" material="foot"/>
+      <geom name="caster_rear" type="sphere" size="0.012" pos="-0.045 0 -0.0165" mass="0.01" friction="0.02 0.001 0.0001" material="foot"/>
       <site name="imu" pos="0 0 0.01"/>
 
       <body name="wheel_left" pos="0 0.05 0">
@@ -60,25 +74,54 @@
       <!-- upper body sways on two servos: roll (side to side) and pitch (lean) -->
       <body name="hips" pos="0 0 0.022">
         <joint name="body_roll" type="hinge" axis="1 0 0" range="-0.35 0.35" damping="0.02"/>
-        <geom type="cylinder" size="0.012 0.03" zaxis="1 0 0" mass="0.02" contype="0" conaffinity="0" material="dark"/>
+        <geom type="cylinder" size="0.012 0.03" zaxis="1 0 0" mass="0.02" contype="0" conaffinity="0" material="foot"/>
         <body name="torso" pos="0 0 0">
           <joint name="body_pitch" type="hinge" axis="0 1 0" range="-0.3 0.3" damping="0.02"/>
-          <geom name="torso" type="ellipsoid" size="0.055 0.06 0.06" pos="0 0 0.065" mass="0.18" material="shell"/>
-          <geom class="visual" type="ellipsoid" size="0.04 0.045 0.035" pos="0.02 0 0.06" material="accent"/>
+          <geom name="torso" type="ellipsoid" size="0.045 0.05 0.05" pos="0 0 0.06" mass="0.18" material="main"/>
+          <geom name="belly" class="visual" type="ellipsoid" size="0.02 0.032 0.038" pos="0.03 0 0.055" material="face"/>
+          <geom name="emblem" class="visual" type="ellipsoid" size="0.003 0.009 0.008" pos="0.049 0 0.04" material="main"/>
+          <geom name="wing_left" class="visual" type="ellipsoid" size="0.026 0.007 0.036" pos="-0.004 0.05 0.055" euler="0.2 0 0" material="deep"/>
+          <geom name="wing_right" class="visual" type="ellipsoid" size="0.026 0.007 0.036" pos="-0.004 -0.05 0.055" euler="-0.2 0 0" material="deep"/>
 
-          <body name="neck" pos="0.005 0 0.12">
-            <joint name="head_yaw" type="hinge" axis="0 0 1" range="-1.2 1.2" damping="0.01"/>
-            <geom type="cylinder" size="0.015 0.012" mass="0.01" contype="0" conaffinity="0" material="dark"/>
-            <body name="head" pos="0 0 0.012">
+          <!-- neck joint: the head turns on it like an owl's, almost 120 degrees each way -->
+          <body name="neck" pos="0 0 0.108">
+            <joint name="head_yaw" type="hinge" axis="0 0 1" range="-2.0 2.0" damping="0.01"/>
+            <geom type="cylinder" size="0.022 0.006" mass="0.01" contype="0" conaffinity="0" material="ink"/>
+            <body name="head" pos="0 0 0.006">
               <joint name="head_pitch" type="hinge" axis="0 1 0" range="-0.5 0.5" damping="0.01"/>
-              <geom name="head" type="ellipsoid" size="0.06 0.07 0.05" pos="0.01 0 0.045" mass="0.12" material="shell"/>
-              <!-- round LCD eyes and camera -->
-              <geom class="visual" type="cylinder" size="0.018 0.003" pos="0.066 0.026 0.05" zaxis="1 0 0" material="dark"/>
-              <geom class="visual" type="cylinder" size="0.018 0.003" pos="0.066 -0.026 0.05" zaxis="1 0 0" material="dark"/>
-              <geom class="visual" type="sphere" size="0.006" pos="0.068 0.03 0.056" rgba="1 1 1 1"/>
-              <geom class="visual" type="sphere" size="0.006" pos="0.068 -0.022 0.056" rgba="1 1 1 1"/>
-              <geom class="visual" type="sphere" size="0.005" pos="0.068 0 0.075" material="dark"/>
-              <camera name="eyes" pos="0.07 0 0.075" xyaxes="0 -1 0 0 0 1" fovy="70"/>
+              <geom name="head" type="ellipsoid" size="0.052 0.07 0.05" pos="0 0 0.05" mass="0.12" material="main"/>
+              <!-- facial disc, eye sockets and round LCD eyes -->
+              <geom class="visual" type="ellipsoid" size="0.012 0.03 0.03" pos="0.04 0.027 0.055" material="face"/>
+              <geom class="visual" type="ellipsoid" size="0.012 0.03 0.03" pos="0.04 -0.027 0.055" material="face"/>
+              <geom class="visual" type="ellipsoid" size="0.006 0.021 0.021" pos="0.05 0.027 0.056" material="ink"/>
+              <geom class="visual" type="ellipsoid" size="0.006 0.021 0.021" pos="0.05 -0.027 0.056" material="ink"/>
+              <geom class="visual" type="cylinder" size="0.013 0.001" pos="0.0565 0.027 0.056" zaxis="1 0 0" material="eye"/>
+              <geom class="visual" type="cylinder" size="0.013 0.001" pos="0.0565 -0.027 0.056" zaxis="1 0 0" material="eye"/>
+              <geom class="visual" type="cylinder" size="0.0065 0.001" pos="0.058 0.027 0.055" zaxis="1 0 0" material="ink"/>
+              <geom class="visual" type="cylinder" size="0.0065 0.001" pos="0.058 -0.027 0.055" zaxis="1 0 0" material="ink"/>
+              <geom class="visual" type="sphere" size="0.0028" pos="0.059 0.032 0.061" material="white"/>
+              <geom class="visual" type="sphere" size="0.0028" pos="0.059 -0.022 0.061" material="white"/>
+              <geom name="beak" class="visual" type="box" size="0.006 0.006 0.006" pos="0.054 0 0.033" euler="0.785 0 0" material="beak"/>
+              <geom class="visual" type="sphere" size="0.005" pos="0.046 0.05 0.033" material="cheek"/>
+              <geom class="visual" type="sphere" size="0.005" pos="0.046 -0.05 0.033" material="cheek"/>
+              <!-- camera between the eyes -->
+              <camera name="eyes" pos="0.058 0 0.07" xyaxes="0 -1 0 0 0 1" fovy="70"/>
+
+              <!-- Care: round ears -->
+              <geom name="ear_care_l" class="visual" type="cylinder" size="0.018 0.004" pos="-0.005 0.055 0.09" zaxis="1 0 0" material="deep"/>
+              <geom name="ear_care_r" class="visual" type="cylinder" size="0.018 0.004" pos="-0.005 -0.055 0.09" zaxis="1 0 0" material="deep"/>
+              <geom name="ear_care_tip_l" class="visual" type="cylinder" size="0.009 0.001" pos="0 0.055 0.09" zaxis="1 0 0" material="accent"/>
+              <geom name="ear_care_tip_r" class="visual" type="cylinder" size="0.009 0.001" pos="0 -0.055 0.09" zaxis="1 0 0" material="accent"/>
+              <!-- Guard: pointed alert tufts with amber tips -->
+              <geom name="ear_guard_l" class="visual" type="ellipsoid" size="0.006 0.012 0.03" pos="0 0.05 0.1" euler="-0.5 0 0" material="deep"/>
+              <geom name="ear_guard_r" class="visual" type="ellipsoid" size="0.006 0.012 0.03" pos="0 -0.05 0.1" euler="0.5 0 0" material="deep"/>
+              <geom name="ear_guard_tip_l" class="visual" type="ellipsoid" size="0.0065 0.006 0.012" pos="0 0.061 0.12" euler="-0.5 0 0" material="accent"/>
+              <geom name="ear_guard_tip_r" class="visual" type="ellipsoid" size="0.0065 0.006 0.012" pos="0 -0.061 0.12" euler="0.5 0 0" material="accent"/>
+              <!-- Play: spring antennae with coloured balls -->
+              <geom name="ear_play_l" class="visual" type="capsule" size="0.0025" fromto="0 0.03 0.09 0 0.05 0.14" material="deep"/>
+              <geom name="ear_play_r" class="visual" type="capsule" size="0.0025" fromto="0 -0.03 0.09 0 -0.05 0.14" material="deep"/>
+              <geom name="ear_play_tip_l" class="visual" type="sphere" size="0.01" pos="0 0.05 0.145" material="accent"/>
+              <geom name="ear_play_tip_r" class="visual" type="sphere" size="0.01" pos="0 -0.05 0.145" material="tip_alt"/>
             </body>
           </body>
         </body>

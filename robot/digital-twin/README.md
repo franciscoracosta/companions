@@ -2,10 +2,12 @@
 
 Simulação em MuJoCo do Wobi. Há dois robôs:
 
-- **`wobi` (por defeito): Wobi com rodas escondidas nos pés.** Duas rodas com motor N20 deslocam-no; dois
-  servos balançam o corpo como um pinguim e outros dois mexem a cabeça. Não há aprendizagem: tração
-  diferencial, rampas de aceleração e ondas seno para o balanço. As formas são provisórias até a casca
-  existir em Onshape.
+- **`wobi` (por defeito): o Wobi coruja, com rodas escondidas nos pés.** Segue o visual do site: cabeça
+  grande sobre um pescoço que roda quase 120° para cada lado, disco facial com olhos LCD redondos, bico,
+  asas, barriga creme e pés escuros. `--line care|guard|play` escolhe as cores e as orelhas de cada linha
+  (redondas, tufos de alerta, antenas de mola). Duas rodas com motor N20 deslocam-no, dois servos balançam o
+  corpo como um pinguim e outros dois mexem a cabeça. Não há aprendizagem: tração diferencial, rampas de
+  aceleração e ondas seno para o balanço. As formas são primitivas provisórias até a casca existir em Onshape.
 - **`duck`: Open Duck Mini v2**, o bípede open source, com a política de marcha pré-treinada a correr no CPU.
 
 ## Instalar (macOS, Linux ou Windows)
@@ -21,6 +23,7 @@ pip install -r requirements.txt
 ```bash
 python run.py test                   # teste rápido: fica de pé, anda, roda, manobras bruscas, não cai
 python run.py view                   # janela 3D (no macOS usar: mjpython run.py view)
+python run.py view --line guard      # a coruja Guard (também: care, play)
 python run.py view --robot duck      # o mesmo com o pato bípede
 python run.py record -o demo.mp4     # vídeo de uma missão de patrulha, sem janela
 python run.py record --telemetry t.json   # e guarda o estado do robô em cada passo
@@ -40,9 +43,9 @@ isto faz o robô levantar uma roda e tombar na simulação; é a primeira coisa 
 
 | Caminho | O que é |
 | --- | --- |
-| `wobi_twin/wheels.py` | `WobiWheelsTwin`: Wobi com rodas nos pés, tração diferencial e balanço do corpo |
+| `wobi_twin/wheels.py` | `WobiWheelsTwin`: Wobi coruja com rodas nos pés, tração diferencial, balanço do corpo e cores por linha |
 | `wobi_twin/twin.py` | `DuckTwin`: carrega o pato, corre a física a 500 Hz e a política a 50 Hz. Define também `Command` (velocidade e pose da cabeça) e `State` (posição, juntas, contacto com o chão, se caiu), comuns aos dois |
-| `models/wobi_wheels/` | Modelo MJCF do Wobi com rodas (formas simples, sem malhas) |
+| `models/wobi_wheels/` | Modelo MJCF da coruja com rodas (formas simples, sem malhas; as orelhas das três linhas estão todas lá) |
 | `run.py` | Linha de comandos: `view`, `record`, `test` e a missão de exemplo |
 | `models/open_duck_mini_v2/` | Modelo MJCF e malhas STL do Open Duck Mini v2 |
 | `policies/` | Política de marcha (ONNX) e movimento de referência usado para a fase do passo |
