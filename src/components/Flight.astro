@@ -1,0 +1,315 @@
+---
+import Robot from './Robot.astro';
+import { lines, type LineId, type Locale } from '../config';
+import { t } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const d = t(Astro.props.locale);
+const order: LineId[] = ['care', 'guard', 'play'];
+const icons = [
+  'M4 20h5v-5h5v-5h6M15 5l3-3 3 3M18 2v7',
+  'M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',
+  'M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
+];
+---
+
+<section class="section flight" id="flight">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">{d.flight.eyebrow}</span>
+      <h2 class="h2">{d.flight.title}</h2>
+      <p class="lead">{d.flight.subtitle}</p>
+    </div>
+
+    <div class="flight-grid">
+      <div class="stage" data-reveal data-flight>
+        <svg class="stairs" viewBox="0 0 400 300" aria-hidden="true">
+          <path d="M0 290h170v-30h30v-30h30v-30h30v-30h140v130H0z" class="steps" />
+          <path d="M170 290v-30M200 260v-30M230 230v-30M260 200v-30" class="edge" />
+          <rect x="150" y="34" width="70" height="78" rx="10" class="window" />
+          <path d="M185 34v78M150 73h70" class="frame" />
+        </svg>
+        <div class="climber">
+          {order.map((id, i) => (
+            <div class:list={['bot', { 'is-active': i === 0 }]} data-bot={id}>
+              <Robot variant={id} class="robot--fly-cycle" />
+            </div>
+          ))}
+        </div>
+        <div class="picker" role="group" aria-label={d.flight.pick}>
+          {order.map((id, i) => (
+            <button type="button" style={`--accent:${lines[id].color}`} aria-pressed={i === 0 ? 'true' : 'false'} data-pick-bot={id}>
+              {d.lines.items[id].name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="uses">
+        {d.flight.items.map((it, i) => (
+          <div class="use" data-reveal>
+            <span class="icon"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d={icons[i]} /></svg></span>
+            <div>
+              <span class="who">{it.tag}</span>
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <ul class="safety" data-reveal>
+      {d.flight.safety.map((s) => (
+        <li>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20 6L9 17l-5-5" /></svg>
+          {s}
+        </li>
+      ))}
+    </ul>
+    <p class="note">{d.flight.note}</p>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-flight]').forEach((stage) => {
+    const buttons = stage.querySelectorAll<HTMLButtonElement>('[data-pick-bot]');
+    buttons.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pickBot;
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        stage.querySelectorAll<HTMLElement>('[data-bot]').forEach((bot) => bot.classList.toggle('is-active', bot.dataset.bot === id));
+      }),
+    );
+  });
+</script>
+
+<style>
+  .flight {
+    padding-top: 0;
+  }
+
+  .flight-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: center;
+  }
+
+  .stage {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, var(--sky-soft), var(--cream-2));
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .stairs {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .steps {
+    fill: var(--paper);
+  }
+
+  .edge {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 2;
+  }
+
+  .window {
+    fill: color-mix(in srgb, var(--sky) 18%, white);
+    stroke: var(--paper);
+    stroke-width: 5;
+  }
+
+  .frame {
+    stroke: var(--paper);
+    stroke-width: 4;
+  }
+
+  /* Same coordinates as the stairs: 400 x 300 */
+  .climber {
+    position: absolute;
+    width: 24%;
+    left: 3%;
+    bottom: 3.3%;
+    animation: climb 9s var(--ease) infinite;
+  }
+
+  .bot {
+    display: none;
+  }
+
+  .bot.is-active {
+    display: block;
+  }
+
+  .climber :global(.robot) {
+    width: 100%;
+  }
+
+  .picker {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .picker button {
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.75);
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .picker button[aria-pressed='true'] {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .uses {
+    display: grid;
+    gap: 26px;
+  }
+
+  .use {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+  }
+
+  .icon path,
+  .safety path {
+    fill: none;
+    stroke: var(--sky);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .who {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .use h3 {
+    font-size: 24px;
+    margin-top: 4px;
+  }
+
+  .use p {
+    margin-top: 6px;
+    color: var(--ink-2);
+  }
+
+  .safety {
+    list-style: none;
+    padding: 0;
+    margin: clamp(32px, 5vw, 56px) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .safety li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .note {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+
+  @keyframes climb {
+    0%,
+    18% {
+      left: 3%;
+      bottom: 3.3%;
+      opacity: 1;
+    }
+    30% {
+      left: 6%;
+      bottom: 20%;
+    }
+    52% {
+      left: 64%;
+      bottom: 56%;
+    }
+    62%,
+    90% {
+      left: 68%;
+      bottom: 43.3%;
+      opacity: 1;
+    }
+    95% {
+      left: 68%;
+      bottom: 43.3%;
+      opacity: 0;
+    }
+    96% {
+      left: 3%;
+      bottom: 3.3%;
+      opacity: 0;
+    }
+    100% {
+      left: 3%;
+      bottom: 3.3%;
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .flight-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Without motion, show the robot hovering mid-flight over the stairs */
+  @media (prefers-reduced-motion: reduce) {
+    .climber {
+      animation: none;
+      left: 36%;
+      bottom: 40%;
+    }
+  }
+</style>
