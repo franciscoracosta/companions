@@ -5,15 +5,17 @@ interface Props {
   variant: LineId;
   class?: string;
   blueprint?: boolean;
+  /** Show the flight rotors deployed (drone mode) */
+  flying?: boolean;
   label?: string;
 }
 
-const { variant, class: cls = '', blueprint = false, label } = Astro.props;
+const { variant, class: cls = '', blueprint = false, flying = false, label } = Astro.props;
 const id = `${variant}-${Math.random().toString(36).slice(2, 7)}`;
 ---
 
 <svg
-  class:list={['robot', `robot--${variant}`, { 'robot--blueprint': blueprint }, cls]}
+  class:list={['robot', `robot--${variant}`, { 'robot--blueprint': blueprint, 'robot--flying': flying }, cls]}
   viewBox="0 0 200 250"
   role={label ? 'img' : undefined}
   aria-label={label}
@@ -42,6 +44,24 @@ const id = `${variant}-${Math.random().toString(36).slice(2, 7)}`;
   </g>
 
   <g class="r-body">
+    {/* Flight rotors (drone mode): four arms slide out of the middle of the body. Back pair first, behind the wings */}
+    <g class="r-rotors r-rotors--back">
+      <g class="r-rotor">
+          <path d="M70 160 18 150" class="r-boom" />
+          <ellipse cx="16" cy="146" rx="24" ry="6" class="r-guard" />
+          <ellipse cx="16" cy="146" rx="21" ry="4" class="r-disc" />
+          <ellipse cx="16" cy="146" rx="20" ry="2.4" class="r-prop" />
+          <rect x="11" y="146" width="10" height="9" rx="3" class="r-motor" />
+        </g>
+      <g class="r-rotor">
+          <path d="M130 160l52-10" class="r-boom" />
+          <ellipse cx="184" cy="146" rx="24" ry="6" class="r-guard" />
+          <ellipse cx="184" cy="146" rx="21" ry="4" class="r-disc" />
+          <ellipse cx="184" cy="146" rx="20" ry="2.4" class="r-prop" />
+          <rect x="179" y="146" width="10" height="9" rx="3" class="r-motor" />
+        </g>
+    </g>
+
     {/* Wings */}
     <path class="r-arm r-arm--l" d="M52 148c-16 14-20 38-10 58 4-4 9-10 12-17 3-12 2-28-2-41z" />
     <path class="r-arm r-arm--r" d="M148 148c16 14 20 38 10 58-4-4-9-10-12-17-3-12-2-28 2-41z" />
@@ -54,6 +74,25 @@ const id = `${variant}-${Math.random().toString(36).slice(2, 7)}`;
       {variant === 'care' && <path d="M0 -5c-3-6-12-5-12 2 0 6 7 9 12 13 5-4 12-7 12-13 0-7-9-8-12-2z" />}
       {variant === 'guard' && <path d="M0 -11l11 4v6c0 8-5 12-11 15-6-3-11-7-11-15v-6z" />}
       {variant === 'play' && <path d="M0 -11l3.3 6.9 7.4 1-5.5 5.1 1.4 7.4-6.6-3.7-6.6 3.7 1.4-7.4-5.5-5.1 7.4-1z" />}
+    </g>
+
+    {/* Waist seam the rotor arms slide out of, then the front pair */}
+    <path d="M52 176c30 6 66 6 96 0" class="r-seam" />
+    <g class="r-rotors r-rotors--front">
+      <g class="r-rotor">
+          <path d="M60 176-12 166" class="r-boom" />
+          <ellipse cx="-12" cy="160" rx="32" ry="8" class="r-guard" />
+          <ellipse cx="-12" cy="160" rx="29" ry="6" class="r-disc" />
+          <ellipse cx="-12" cy="160" rx="28" ry="2.4" class="r-prop" />
+          <rect x="-17" y="160" width="10" height="9" rx="3" class="r-motor" />
+        </g>
+      <g class="r-rotor">
+          <path d="M140 176l72-10" class="r-boom" />
+          <ellipse cx="212" cy="160" rx="32" ry="8" class="r-guard" />
+          <ellipse cx="212" cy="160" rx="29" ry="6" class="r-disc" />
+          <ellipse cx="212" cy="160" rx="28" ry="2.4" class="r-prop" />
+          <rect x="207" y="160" width="10" height="9" rx="3" class="r-motor" />
+        </g>
     </g>
 
     {/* Neck joint: the head turns on it like an owl's */}

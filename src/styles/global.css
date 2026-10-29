@@ -455,6 +455,103 @@ p {
   fill: var(--eye);
 }
 
+/* Drone mode: rotor arms hide inside the waist and slide out to fly */
+.r-rotors {
+  transform-origin: 50% 50%;
+  transform: scaleX(0);
+  opacity: 0;
+  transition: transform 0.6s var(--ease), opacity 0.3s;
+}
+
+.r-boom {
+  fill: none;
+  stroke: var(--r-dark);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.r-motor {
+  fill: var(--r-dark);
+}
+
+.r-guard {
+  fill: none;
+  stroke: var(--r-deep);
+  stroke-width: 3.5;
+}
+
+.r-disc {
+  fill: color-mix(in srgb, var(--r-light) 40%, transparent);
+}
+
+.r-prop {
+  fill: var(--r-dark);
+  opacity: 0.75;
+  transform-origin: center;
+  animation: prop 0.14s linear infinite;
+}
+
+.r-seam {
+  fill: none;
+  stroke: color-mix(in srgb, var(--r-dark) 25%, transparent);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.robot--flying .r-rotors {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.robot--flying .r-body,
+.robot--flying .r-legs {
+  animation: hover 2.4s ease-in-out infinite;
+}
+
+.robot--flying .r-legs .r-foot {
+  transform-origin: 50% 0;
+  transform: scaleY(0.75);
+}
+
+.robot--flying .r-toe {
+  opacity: 0;
+}
+
+.robot--flying .r-shadow {
+  animation: hover-shadow 2.4s ease-in-out infinite;
+}
+
+/* Looping transformation used by the flight section: deploy rotors, fly, land, retract */
+.robot--fly-cycle .r-rotors {
+  transition: none;
+  animation: rotors-cycle 9s var(--ease) infinite;
+}
+
+.robot--fly-cycle .r-shadow {
+  animation: shadow-cycle 9s var(--ease) infinite;
+}
+
+.robot--blueprint .r-boom {
+  stroke: var(--eye);
+}
+
+.robot--blueprint .r-motor {
+  fill: var(--eye);
+}
+
+.robot--blueprint .r-guard {
+  stroke: var(--eye);
+}
+
+.robot--blueprint .r-disc,
+.robot--blueprint .r-prop {
+  fill: none;
+}
+
+.robot--blueprint .r-seam {
+  stroke: var(--eye);
+}
+
 @keyframes sway {
   0%,
   100% {
@@ -550,6 +647,66 @@ p {
   }
   50% {
     transform: rotate(7deg);
+  }
+}
+
+@keyframes prop {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.12);
+  }
+}
+
+@keyframes hover {
+  0%,
+  100% {
+    transform: translateY(-34px) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-42px) rotate(1.5deg);
+  }
+}
+
+@keyframes hover-shadow {
+  0%,
+  100% {
+    transform: scaleX(0.62);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scaleX(0.55);
+    opacity: 0.55;
+  }
+}
+
+@keyframes rotors-cycle {
+  0%,
+  10%,
+  74%,
+  100% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  18%,
+  66% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shadow-cycle {
+  0%,
+  22%,
+  62%,
+  100% {
+    opacity: 1;
+  }
+  28%,
+  56% {
+    opacity: 0;
   }
 }
 
