@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   const { error } = await resend.emails.receiving.forward({
     emailId: event.data.email_id,
     to: process.env.PREORDER_NOTIFY_TO,
-    from: 'Wobi <hello@getwobi.com>',
+    from: 'Nurtie <hello@getwobi.com>',
   });
   if (error) {
     console.error('forward failed', error);

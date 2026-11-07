@@ -59,7 +59,7 @@ const pt = {
     title: 'Onde estamos e para onde vamos.',
     steps: [
       { date: 'Hoje', title: 'Protótipo e marca', text: 'Conceito, identidade e primeiras versões do robô e da app em desenvolvimento. Pré-encomendas abertas para medir interesse.' },
-      { date: '2027 S1', title: 'Programa beta', text: 'Unidades testadas em casa de famílias selecionadas, com foco no Wobi Care.' },
+      { date: '2027 S1', title: 'Programa beta', text: 'Unidades testadas em casa de famílias selecionadas, com foco no Nurtie Care.' },
       { date: '2027 S2', title: 'Primeira série', text: 'Produção da primeira série e entregas a quem pré-encomendou.' },
       { date: '2028', title: 'Escala', text: 'Lançamento das três linhas na Europa e primeiros contratos B2B.' },
     ],
@@ -79,14 +79,14 @@ const pt = {
     eyebrow: 'Equipa',
     title: 'Quem está a construir.',
     founder: 'Fundador',
-    founderText: 'Apaixonado por IA, robótica e modelação 3D. Está a liderar o design, o produto e a tecnologia da Wobi.',
+    founderText: 'Apaixonado por IA, robótica e modelação 3D. Está a liderar o design, o produto e a tecnologia da Nurtie.',
     hiring: 'Estamos à procura de pessoas de hardware e de IA para se juntarem à equipa fundadora.',
   },
   cta: {
     title: 'Vamos conversar.',
     text: 'Se acredita que a próxima geração de robôs vai viver connosco em casa, gostávamos de lhe mostrar o que estamos a construir.',
     button: 'Escrever ao fundador',
-    subject: 'Investimento na Wobi',
+    subject: 'Investimento na Nurtie',
   },
   disclaimer: 'Esta página tem fins informativos e não constitui uma oferta de valores mobiliários. Os planos e as datas são previsões e podem mudar.',
 };
