@@ -48,7 +48,7 @@ if (finePointer && !reduced) {
   });
 }
 
-// Pre-order form: posts to /api/preorder, which stores the contact in Resend and emails a confirmation.
+// Pre-order form: posts to /api/preorder, which stores the pre-order in the database and Resend and emails a confirmation.
 const form = document.querySelector<HTMLFormElement>('[data-preorder]');
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -76,6 +76,10 @@ form?.addEventListener('submit', async (e) => {
         model: fields.get('model'),
         company: fields.get('company'),
         locale: form.dataset.locale,
+        referrer: document.referrer || null,
+        utm: Object.fromEntries(
+          ['source', 'medium', 'campaign'].map((k) => [k, new URLSearchParams(location.search).get(`utm_${k}`)]),
+        ),
       }),
     });
     ok = res.ok;
