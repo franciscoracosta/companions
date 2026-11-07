@@ -2,7 +2,7 @@
 // keeps the contact in Resend and sends two emails: a confirmation to the customer and a
 // notification to the team.
 const RESEND = 'https://api.resend.com';
-const FROM = 'Nurtie <hello@getwobi.com>';
+const FROM = 'Nurtie <hello@getnurtie.com>';
 const MODELS = { care: 'Nurtie Care', guard: 'Nurtie Guard', play: 'Nurtie Play' } as const;
 type Model = keyof typeof MODELS;
 

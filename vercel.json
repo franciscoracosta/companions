@@ -1,5 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/((?!api/).*)",
+      "has": [{ "type": "host", "value": "(www\\.)?getwobi\\.com" }],
+      "destination": "https://getnurtie.com/$1",
+      "permanent": true
+    }
+  ]
 }
