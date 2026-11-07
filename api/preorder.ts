@@ -1,5 +1,6 @@
-// Pre-order form handler (Vercel Function). Saves the contact in Resend and sends two emails:
-// a confirmation to the customer and a notification to the team.
+// Pre-order form handler (Vercel Function). Saves the pre-order in the database (Supabase),
+// keeps the contact in Resend and sends two emails: a confirmation to the customer and a
+// notification to the team.
 const RESEND = 'https://api.resend.com';
 const FROM = 'Nurtie <hello@getwobi.com>';
 const MODELS = { care: 'Nurtie Care', guard: 'Nurtie Guard', play: 'Nurtie Play' } as const;
@@ -28,6 +29,28 @@ async function resend(path: string, method: string, body?: object) {
   });
 }
 
+// Stores one pre-order through the Supabase function public.submit_preorder. The table itself is
+// closed to the API; the function only inserts, so the publishable key cannot read anything back.
+async function savePreorder(row: Record<string, unknown>) {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_KEY;
+  if (!url || !key) return false;
+  try {
+    const res = await fetch(`${url}/rest/v1/rpc/submit_preorder`, {
+      method: 'POST',
+      headers: { apikey: key, 'content-type': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(Object.entries(row).map(([k, v]) => [`p_${k}`, v]))),
+    });
+    if (!res.ok) console.error('supabase insert', res.status, await res.text());
+    return res.ok;
+  } catch (err) {
+    console.error('supabase insert', err);
+    return false;
+  }
+}
+
+const short = (v: unknown, max = 300) => (typeof v === 'string' && v.trim() ? v.trim().slice(0, max) : null);
+
 export async function POST(request: Request) {
   let data: Record<string, unknown>;
   try {
@@ -46,6 +69,19 @@ export async function POST(request: Request) {
     return json(400, { ok: false });
   }
 
+  const utm = (data.utm && typeof data.utm === 'object' ? data.utm : {}) as Record<string, unknown>;
+  const saved = await savePreorder({
+    email,
+    model,
+    locale,
+    country: short(request.headers.get('x-vercel-ip-country'), 2),
+    referrer: short(data.referrer),
+    utm_source: short(utm.source, 100),
+    utm_medium: short(utm.medium, 100),
+    utm_campaign: short(utm.campaign, 100),
+    user_agent: short(request.headers.get('user-agent')),
+  });
+
   const properties = { wobi_model: model, wobi_locale: locale };
   const created = await resend('/contacts', 'POST', { email, unsubscribed: false, properties });
   if (!created.ok) {
@@ -53,7 +89,8 @@ export async function POST(request: Request) {
     const updated = await resend(`/contacts/${encodeURIComponent(email)}`, 'PATCH', { properties });
     if (!updated.ok) {
       console.error('resend contact', created.status, await created.text(), updated.status, await updated.text());
-      return json(502, { ok: false });
+      // Only fail the request when the pre-order was not stored anywhere.
+      if (!saved) return json(502, { ok: false });
     }
   }
   if (process.env.RESEND_SEGMENT_ID) {
@@ -76,7 +113,7 @@ export async function POST(request: Request) {
         to: process.env.PREORDER_NOTIFY_TO,
         reply_to: email,
         subject: `Nova pré-encomenda: ${name}`,
-        text: `Email: ${email}\nModelo: ${name}\nLíngua: ${locale}`,
+        text: `Email: ${email}\nModelo: ${name}\nLíngua: ${locale}\nPaís: ${request.headers.get('x-vercel-ip-country') ?? '?'}\nBase de dados: ${saved ? 'guardado' : 'FALHOU (ver logs da Vercel)'}`,
       }),
     );
   }
