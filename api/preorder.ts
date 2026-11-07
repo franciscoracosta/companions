@@ -29,21 +29,17 @@ async function resend(path: string, method: string, body?: object) {
   });
 }
 
-// Inserts one row in public.preorders through Supabase's REST API (service role key, server only).
+// Stores one pre-order through the Supabase function public.submit_preorder. The table itself is
+// closed to the API; the function only inserts, so the publishable key cannot read anything back.
 async function savePreorder(row: Record<string, unknown>) {
   const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const key = process.env.SUPABASE_KEY;
   if (!url || !key) return false;
   try {
-    const res = await fetch(`${url}/rest/v1/preorders`, {
+    const res = await fetch(`${url}/rest/v1/rpc/submit_preorder`, {
       method: 'POST',
-      headers: {
-        apikey: key,
-        Authorization: `Bearer ${key}`,
-        'content-type': 'application/json',
-        Prefer: 'return=minimal',
-      },
-      body: JSON.stringify(row),
+      headers: { apikey: key, 'content-type': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(Object.entries(row).map(([k, v]) => [`p_${k}`, v]))),
     });
     if (!res.ok) console.error('supabase insert', res.status, await res.text());
     return res.ok;
