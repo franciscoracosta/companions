@@ -1,6 +1,6 @@
-# Wobi · landing page
+# Nurtie · landing page
 
-Landing page multilingue da Wobi, uma família de robôs companheiros com IA (Care, Guard e Play).
+Landing page multilingue da Nurtie, uma família de robôs companheiros com IA (Care, Guard e Play).
 
 - **Stack:** [Astro](https://astro.build) (site estático) + [GSAP](https://gsap.com) para animações de scroll.
 - **Línguas:** pt-PT (`/pt/`), pt-BR (`/br/`), inglês, espanhol, francês, alemão e italiano. A raiz `/` redireciona para a língua do navegador.

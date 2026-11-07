@@ -60,7 +60,7 @@ const en: InvestorDict = {
     title: 'Where we are and where we are going.',
     steps: [
       { date: 'Today', title: 'Prototype and brand', text: 'Concept, identity and first versions of the robot and app in development. Pre-orders open to gauge demand.' },
-      { date: '2027 H1', title: 'Beta programme', text: 'Units tested in the homes of selected families, focused on Wobi Care.' },
+      { date: '2027 H1', title: 'Beta programme', text: 'Units tested in the homes of selected families, focused on Nurtie Care.' },
       { date: '2027 H2', title: 'First batch', text: 'Production of the first batch and deliveries to pre-order customers.' },
       { date: '2028', title: 'Scale', text: 'All three lines launched across Europe and first B2B contracts.' },
     ],
@@ -80,14 +80,14 @@ const en: InvestorDict = {
     eyebrow: 'Team',
     title: 'Who is building it.',
     founder: 'Founder',
-    founderText: 'Passionate about AI, robotics and 3D modelling. Leading design, product and technology at Wobi.',
+    founderText: 'Passionate about AI, robotics and 3D modelling. Leading design, product and technology at Nurtie.',
     hiring: 'We are looking for hardware and AI people to join the founding team.',
   },
   cta: {
     title: "Let's talk.",
     text: 'If you believe the next generation of robots will live with us at home, we would love to show you what we are building.',
     button: 'Email the founder',
-    subject: 'Investing in Wobi',
+    subject: 'Investing in Nurtie',
   },
   disclaimer: 'This page is for information only and does not constitute an offer of securities. Plans and dates are forecasts and may change.',
 };

@@ -1,10 +1,10 @@
 // Single source of truth for the brand. Rename the brand or change prices here.
 export const brand = {
-  name: 'Wobi',
+  name: 'Nurtie',
   email: 'hello@getwobi.com',
-  company: 'Wobi Robotics',
+  company: 'Nurtie Robotics',
   // Shown in legal pages until the company is registered.
-  legalEntity: 'Wobi Robotics (em constituição)',
+  legalEntity: 'Nurtie Robotics (em constituição)',
   country: 'Portugal',
 };
 
