@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // Update `site` once the domain is bought (used for canonical URLs and the sitemap).
 export default defineConfig({
-  site: 'https://getwobi.com',
+  site: 'https://getnurtie.com',
   trailingSlash: 'ignore',
   integrations: [sitemap()],
 });

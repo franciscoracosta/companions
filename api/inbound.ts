@@ -1,7 +1,8 @@
-// Resend webhook: forwards mail received at @getwobi.com (e.g. hello@) to the team's inbox.
+// Resend webhook: forwards mail received at @getnurtie.com or the old @getwobi.com (e.g. hello@) to the team's inbox.
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const TEAM_DOMAINS = ['@getnurtie.com', '@getwobi.com'];
 
 export async function POST(request: Request) {
   const payload = await request.text();
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
     return new Response('Invalid signature', { status: 401 });
   }
 
-  const forTeam = event.data.to?.some((a) => a.toLowerCase().endsWith('@getwobi.com')) ?? true;
+  const forTeam = event.data.to?.some((a) => TEAM_DOMAINS.some((d) => a.toLowerCase().endsWith(d))) ?? true;
   if (event.type !== 'email.received' || !forTeam || !process.env.PREORDER_NOTIFY_TO) {
     return Response.json({ skipped: true });
   }
@@ -27,7 +28,7 @@ export async function POST(request: Request) {
   const { error } = await resend.emails.receiving.forward({
     emailId: event.data.email_id,
     to: process.env.PREORDER_NOTIFY_TO,
-    from: 'Nurtie <hello@getwobi.com>',
+    from: 'Nurtie <hello@getnurtie.com>',
   });
   if (error) {
     console.error('forward failed', error);
