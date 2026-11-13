@@ -15,7 +15,7 @@ const pt = {
     subtitle: `${B} é uma família de robôs com IA, do tamanho de uma caneca, que fazem companhia aos avós, ficam de olho nos mais pequenos e animam a casa inteira. E, quando é preciso, voam.`,
     cta: `Reservar o meu ${B}`,
     secondary: 'Conhecer os robôs',
-    note: 'Depósito 100% reembolsável · Sem compromisso',
+    note: 'Reserva gratuita · Sem compromisso',
   },
   marquee: ['Deteção de quedas', 'Lembretes de medicação', 'Alertas de perigo', 'IA no próprio robô', 'Feito na Europa', 'Personalidade única', 'Privacidade em primeiro lugar', 'Peças impressas em 3D', `Modo voo`],
   lines: {
@@ -80,7 +80,7 @@ const pt = {
     items: [
       { title: 'Privacidade por defeito', text: 'Processamento local, dados encriptados e conformidade com o RGPD.' },
       { title: 'Desenhado na Europa', text: 'Concebido e testado em Portugal, com componentes certificados.' },
-      { title: 'Reserva sem risco', text: 'Depósito reembolsável a qualquer momento, até ao envio.' },
+      { title: 'Reserva sem risco', text: 'Reservar é grátis. Não pedimos qualquer pagamento nesta fase.' },
     ],
   },
   roadmap: {
@@ -88,7 +88,7 @@ const pt = {
     title: 'Do protótipo até à sua casa.',
     steps: [
       { date: '2026', title: 'Protótipo funcional', text: `Primeiros ${B} a rolar, ver e conversar no nosso laboratório.`, done: true },
-      { date: 'Agora', title: 'Pré-encomendas abertas', text: 'Reserve o seu lugar na primeira série com um depósito reembolsável.', done: true },
+      { date: 'Agora', title: 'Pré-encomendas abertas', text: 'Reserve o seu lugar na primeira série, sem pagar nada.', done: true },
       { date: 'T2 2027', title: 'Programa beta', text: `Famílias selecionadas testam o ${B} em casa e ajudam-nos a afinar cada detalhe.`, done: false },
       { date: 'T4 2027', title: 'Primeiras entregas', text: `Os primeiros ${B} chegam a casa de quem reservou primeiro.`, done: false },
     ],
@@ -96,8 +96,8 @@ const pt = {
   preorder: {
     eyebrow: 'Pré-encomenda',
     title: 'Garanta o seu lugar na primeira série.',
-    subtitle: `Escolha o seu ${B} e deixe o seu email. Só paga o depósito quando abrirmos os pagamentos, e pode cancelar quando quiser.`,
-    deposit: 'Depósito',
+    subtitle: `Escolha o seu ${B} e deixe o seu email. Reservar é grátis e sem compromisso, e pode cancelar quando quiser.`,
+    deposit: 'Reserva grátis',
     choose: 'Escolher',
     selected: 'Escolhido',
     emailLabel: 'O seu email',
@@ -113,11 +113,11 @@ const pt = {
     title: 'Perguntas frequentes',
     items: [
       { q: `Quando é que o ${B} chega?`, a: 'As primeiras entregas estão previstas para o último trimestre de 2027. Quem reserva primeiro recebe primeiro, e vamos dando notícias por email ao longo do caminho.' },
-      { q: 'O depósito é mesmo reembolsável?', a: 'Sim. Pode pedir o reembolso total do depósito a qualquer momento até o robô ser enviado, sem perguntas.' },
+      { q: 'Tenho de pagar alguma coisa para reservar?', a: 'Não. A reserva é grátis e sem compromisso. Se um dia abrirmos pagamentos, avisamos por email antes, e pode sempre desistir.' },
       { q: `O ${B} grava a minha casa?`, a: 'Não. A visão e a voz são processadas no próprio robô. Só são enviados alertas e dados mínimos para a app, sempre encriptados, e pode desligar a câmara quando quiser.' },
       { q: 'Precisa de internet?', a: 'As funções principais funcionam sem internet. A ligação Wi-Fi serve para enviar alertas para a app, fazer videochamadas e receber atualizações.' },
       { q: `O ${B} Care substitui um cuidador?`, a: `Não. O ${B} é um companheiro e um apoio, não um dispositivo médico. Ajuda a manter rotinas e a família informada, mas não substitui cuidados profissionais.` },
-      { q: 'Posso mudar de modelo depois de reservar?', a: 'Claro. Pode trocar de modelo até abrirmos os pagamentos finais.' },
+      { q: 'Posso mudar de modelo depois de reservar?', a: 'Claro. Pode trocar de modelo quando quiser, basta escrever-nos.' },
       { q: `O ${B} voa mesmo? É seguro?`, a: `Sim, em voos curtos. Os quatro rotores saem do meio do corpo e ficam dentro de proteções, o ${B} aterra sozinho quando a bateria está fraca e para os motores se lhe tocarem. Dentro de casa só voa quando precisa, por exemplo para subir escadas. O voo no exterior segue as regras de cada país.` },
     ],
   },

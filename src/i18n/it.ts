@@ -16,7 +16,7 @@ const it: Dict = {
     subtitle: `${B} è una famiglia di robot con IA, grandi quanto una tazza, che fanno compagnia ai nonni, tengono d'occhio i bambini e rallegrano tutta la casa. E quando serve, volano.`,
     cta: `Prenota il mio ${B}`,
     secondary: 'Scopri i robot',
-    note: 'Acconto rimborsabile al 100% · Senza impegno',
+    note: 'Prenotazione gratuita · Senza impegno',
   },
   marquee: ['Rilevamento cadute', 'Promemoria farmaci', 'Avvisi di pericolo', 'IA a bordo', 'Prodotto in Europa', 'Personalità unica', 'Privacy prima di tutto', 'Parti stampate in 3D', `Modalità volo`],
   lines: {
@@ -81,7 +81,7 @@ const it: Dict = {
     items: [
       { title: 'Privacy di default', text: 'Elaborazione locale, dati cifrati e piena conformità al GDPR.' },
       { title: 'Progettato in Europa', text: 'Progettato e testato in Portogallo, con componenti certificati.' },
-      { title: 'Prenotazione senza rischi', text: 'Acconto rimborsabile in qualsiasi momento fino alla spedizione.' },
+      { title: 'Prenotazione senza rischi', text: 'Prenotare è gratis. In questa fase non chiediamo alcun pagamento.' },
     ],
   },
   roadmap: {
@@ -89,7 +89,7 @@ const it: Dict = {
     title: 'Dal prototipo a casa tua.',
     steps: [
       { date: '2026', title: 'Prototipo funzionante', text: `I primi ${B} rotolano, vedono e parlano nel nostro laboratorio.`, done: true },
-      { date: 'Ora', title: 'Preordini aperti', text: 'Assicurati un posto nella prima serie con un acconto rimborsabile.', done: true },
+      { date: 'Ora', title: 'Preordini aperti', text: 'Assicurati un posto nella prima serie, senza pagare nulla.', done: true },
       { date: 'T2 2027', title: 'Programma beta', text: `Famiglie selezionate provano ${B} a casa e ci aiutano a perfezionare ogni dettaglio.`, done: false },
       { date: 'T4 2027', title: 'Prime consegne', text: `I primi ${B} arrivano a casa di chi ha prenotato per primo.`, done: false },
     ],
@@ -97,8 +97,8 @@ const it: Dict = {
   preorder: {
     eyebrow: 'Preordine',
     title: 'Assicurati un posto nella prima serie.',
-    subtitle: `Scegli il tuo ${B} e lasciaci la tua email. Paghi l'acconto solo quando apriremo i pagamenti, e puoi annullare quando vuoi.`,
-    deposit: 'Acconto',
+    subtitle: `Scegli il tuo ${B} e lasciaci la tua email. La prenotazione è gratuita e senza impegno, e puoi annullare quando vuoi.`,
+    deposit: 'Prenotazione gratuita',
     choose: 'Scegli',
     selected: 'Scelto',
     emailLabel: 'La tua email',
@@ -114,11 +114,11 @@ const it: Dict = {
     title: 'Domande frequenti',
     items: [
       { q: `Quando arriva ${B}?`, a: "Le prime consegne sono previste per l'ultimo trimestre del 2027. Chi prenota prima riceve prima, e ti terremo aggiornato via email." },
-      { q: "L'acconto è davvero rimborsabile?", a: "Sì. Puoi chiedere il rimborso completo dell'acconto in qualsiasi momento prima della spedizione, senza domande." },
+      { q: 'Devo pagare qualcosa per prenotare?', a: 'No. La prenotazione è gratuita e senza impegno. Se un giorno apriremo i pagamenti, ti avviseremo prima via email, e potrai sempre rinunciare.' },
       { q: `${B} registra la mia casa?`, a: "No. Visione e voce vengono elaborate sul robot. All'app arrivano solo avvisi e dati minimi, sempre cifrati, e puoi spegnere la fotocamera quando vuoi." },
       { q: 'Serve internet?', a: "Le funzioni principali funzionano offline. Il Wi-Fi serve per inviare avvisi all'app, fare videochiamate e ricevere aggiornamenti." },
       { q: `${B} Care sostituisce un badante?`, a: `No. ${B} è un compagno e un aiuto, non un dispositivo medico. Aiuta a mantenere le routine e a tenere informata la famiglia, ma non sostituisce l'assistenza professionale.` },
-      { q: 'Posso cambiare modello dopo aver prenotato?', a: 'Certo. Puoi cambiare modello fino all\'apertura dei pagamenti finali.' },
+      { q: 'Posso cambiare modello dopo aver prenotato?', a: 'Certo. Puoi cambiare modello quando vuoi, basta scriverci.' },
       { q: `${B} vola davvero? È sicuro?`, a: `Sì, con voli brevi. I quattro rotori escono dalla metà del corpo e stanno dentro protezioni, ${B} atterra da solo quando la batteria è scarica e ferma i motori se qualcuno lo tocca. In casa vola solo quando serve, per esempio per salire le scale. Il volo all'aperto segue le regole di ogni paese.` },
     ],
   },

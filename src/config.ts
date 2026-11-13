@@ -10,7 +10,7 @@ export const brand = {
 
 export type LineId = 'care' | 'guard' | 'play';
 
-// Placeholder prices (EUR). Deposit is refundable.
+// Placeholder prices (EUR). Reservations are free for now; deposit is the planned amount if payments ever open.
 export const lines: Record<LineId, { price: number; deposit: number; color: string; soft: string }> = {
   play: { price: 199, deposit: 19, color: '#FFB627', soft: '#FFF1CC' },
   guard: { price: 279, deposit: 29, color: '#3D8BFF', soft: '#DCEBFF' },
