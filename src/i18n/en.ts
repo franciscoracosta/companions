@@ -16,7 +16,7 @@ const en: Dict = {
     subtitle: `${B} is a family of mug-sized AI robots that keep grandparents company, keep an eye on the little ones and liven up the whole house. And when they need to, they fly.`,
     cta: `Reserve my ${B}`,
     secondary: 'Meet the robots',
-    note: '100% refundable deposit · No commitment',
+    note: 'Free reservation · No commitment',
   },
   marquee: ['Fall detection', 'Medication reminders', 'Danger alerts', 'On-device AI', 'Made in Europe', 'One-of-a-kind personality', 'Privacy first', '3D-printed parts', `Flight mode`],
   lines: {
@@ -81,7 +81,7 @@ const en: Dict = {
     items: [
       { title: 'Private by default', text: 'Local processing, encrypted data and full GDPR compliance.' },
       { title: 'Designed in Europe', text: 'Designed and tested in Portugal, with certified components.' },
-      { title: 'Risk-free reservation', text: 'Deposit refundable at any time until shipping.' },
+      { title: 'Risk-free reservation', text: 'Reserving is free. We are not taking any payments at this stage.' },
     ],
   },
   roadmap: {
@@ -89,7 +89,7 @@ const en: Dict = {
     title: 'From prototype to your home.',
     steps: [
       { date: '2026', title: 'Working prototype', text: `The first ${B} robots roll, see and talk in our lab.`, done: true },
-      { date: 'Now', title: 'Pre-orders open', text: 'Secure your spot in the first batch with a refundable deposit.', done: true },
+      { date: 'Now', title: 'Pre-orders open', text: 'Secure your spot in the first batch, without paying anything.', done: true },
       { date: 'Q2 2027', title: 'Beta programme', text: `Selected families test ${B} at home and help us fine-tune every detail.`, done: false },
       { date: 'Q4 2027', title: 'First deliveries', text: `The first ${B} robots arrive at the homes of the earliest backers.`, done: false },
     ],
@@ -97,8 +97,8 @@ const en: Dict = {
   preorder: {
     eyebrow: 'Pre-order',
     title: 'Secure your spot in the first batch.',
-    subtitle: `Choose your ${B} and leave your email. You only pay the deposit when we open payments, and you can cancel any time.`,
-    deposit: 'Deposit',
+    subtitle: `Choose your ${B} and leave your email. Reserving is free with no commitment, and you can cancel any time.`,
+    deposit: 'Free reservation',
     choose: 'Choose',
     selected: 'Selected',
     emailLabel: 'Your email',
@@ -114,11 +114,11 @@ const en: Dict = {
     title: 'Frequently asked questions',
     items: [
       { q: `When will ${B} ship?`, a: 'First deliveries are planned for Q4 2027. First to reserve, first to receive, and we will keep you posted by email along the way.' },
-      { q: 'Is the deposit really refundable?', a: 'Yes. You can request a full refund of your deposit at any time before your robot ships, no questions asked.' },
+      { q: 'Do I have to pay anything to reserve?', a: 'No. Reserving is free with no commitment. If we ever open payments, we will email you first, and you can always walk away.' },
       { q: `Does ${B} record my home?`, a: 'No. Vision and voice are processed on the robot. Only alerts and minimal data reach the app, always encrypted, and you can switch the camera off whenever you like.' },
       { q: 'Does it need internet?', a: 'Core features work offline. Wi-Fi is used to send alerts to the app, make video calls and receive updates.' },
       { q: `Does ${B} Care replace a carer?`, a: `No. ${B} is a companion and a helper, not a medical device. It helps keep routines and keeps the family informed, but it does not replace professional care.` },
-      { q: 'Can I switch models after reserving?', a: 'Of course. You can change models until we open final payments.' },
+      { q: 'Can I switch models after reserving?', a: 'Of course. You can switch models any time, just write to us.' },
       { q: `Does ${B} really fly? Is it safe?`, a: `Yes, in short flights. The four rotors fold out of the middle of its body and sit inside guards, ${B} lands by itself when the battery runs low and stops its motors if someone touches it. Indoors it only flies when it needs to, for example to climb stairs. Outdoor flight follows each country's rules.` },
     ],
   },

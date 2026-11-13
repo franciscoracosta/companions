@@ -16,7 +16,7 @@ const de: Dict = {
     subtitle: `${B} ist eine Familie tassengroßer KI-Roboter, die Großeltern Gesellschaft leisten, die Kleinen im Blick behalten und das ganze Haus aufmuntern. Und wenn nötig, fliegen sie.`,
     cta: `Meinen ${B} reservieren`,
     secondary: 'Die Roboter kennenlernen',
-    note: '100 % erstattbare Anzahlung · Unverbindlich',
+    note: 'Kostenlose Reservierung · Unverbindlich',
   },
   marquee: ['Sturzerkennung', 'Medikamenten-Erinnerungen', 'Gefahrenwarnungen', 'KI direkt im Roboter', 'Made in Europe', 'Einzigartige Persönlichkeit', 'Datenschutz zuerst', '3D-gedruckte Teile', `Flugmodus`],
   lines: {
@@ -81,7 +81,7 @@ const de: Dict = {
     items: [
       { title: 'Datenschutz als Standard', text: 'Lokale Verarbeitung, verschlüsselte Daten und volle DSGVO-Konformität.' },
       { title: 'Entwickelt in Europa', text: 'Entworfen und getestet in Portugal, mit zertifizierten Komponenten.' },
-      { title: 'Risikofrei reservieren', text: 'Anzahlung bis zum Versand jederzeit erstattbar.' },
+      { title: 'Risikofrei reservieren', text: 'Reservieren ist kostenlos. In dieser Phase verlangen wir keine Zahlung.' },
     ],
   },
   roadmap: {
@@ -89,7 +89,7 @@ const de: Dict = {
     title: 'Vom Prototyp zu Ihnen nach Hause.',
     steps: [
       { date: '2026', title: 'Funktionierender Prototyp', text: `Die ersten ${B} rollen, sehen und sprechen in unserem Labor.`, done: true },
-      { date: 'Jetzt', title: 'Vorbestellung offen', text: 'Sichern Sie sich mit einer erstattbaren Anzahlung einen Platz in der ersten Serie.', done: true },
+      { date: 'Jetzt', title: 'Vorbestellung offen', text: 'Sichern Sie sich einen Platz in der ersten Serie, ohne etwas zu bezahlen.', done: true },
       { date: 'Q2 2027', title: 'Beta-Programm', text: `Ausgewählte Familien testen ${B} zu Hause und helfen uns, jedes Detail zu verfeinern.`, done: false },
       { date: 'Q4 2027', title: 'Erste Auslieferungen', text: `Die ersten ${B} ziehen bei den frühesten Unterstützern ein.`, done: false },
     ],
@@ -97,8 +97,8 @@ const de: Dict = {
   preorder: {
     eyebrow: 'Vorbestellung',
     title: 'Sichern Sie sich einen Platz in der ersten Serie.',
-    subtitle: `Wählen Sie Ihren ${B} und hinterlassen Sie Ihre E-Mail. Die Anzahlung zahlen Sie erst, wenn wir die Zahlungen öffnen, und Sie können jederzeit stornieren.`,
-    deposit: 'Anzahlung',
+    subtitle: `Wählen Sie Ihren ${B} und hinterlassen Sie Ihre E-Mail. Die Reservierung ist kostenlos und unverbindlich, und Sie können jederzeit stornieren.`,
+    deposit: 'Kostenlos reservieren',
     choose: 'Wählen',
     selected: 'Gewählt',
     emailLabel: 'Ihre E-Mail',
@@ -114,11 +114,11 @@ const de: Dict = {
     title: 'Häufige Fragen',
     items: [
       { q: `Wann wird ${B} ausgeliefert?`, a: 'Die ersten Auslieferungen sind für das vierte Quartal 2027 geplant. Wer zuerst reserviert, bekommt zuerst, und wir halten Sie per E-Mail auf dem Laufenden.' },
-      { q: 'Ist die Anzahlung wirklich erstattbar?', a: 'Ja. Sie können die Anzahlung bis zum Versand jederzeit vollständig zurückverlangen, ohne Angabe von Gründen.' },
+      { q: 'Muss ich für die Reservierung etwas bezahlen?', a: 'Nein. Die Reservierung ist kostenlos und unverbindlich. Falls wir jemals Zahlungen öffnen, informieren wir Sie vorher per E-Mail, und Sie können jederzeit zurücktreten.' },
       { q: `Nimmt ${B} mein Zuhause auf?`, a: 'Nein. Bild und Sprache werden im Roboter verarbeitet. Nur Warnungen und minimale Daten gehen verschlüsselt an die App, und Sie können die Kamera jederzeit ausschalten.' },
       { q: 'Braucht er Internet?', a: 'Die Kernfunktionen laufen offline. WLAN wird für Warnungen an die App, Videoanrufe und Updates genutzt.' },
       { q: `Ersetzt ${B} Care eine Pflegekraft?`, a: `Nein. ${B} ist ein Begleiter und Helfer, kein Medizinprodukt. Er hilft, Routinen einzuhalten und die Familie zu informieren, ersetzt aber keine professionelle Pflege.` },
-      { q: 'Kann ich nach der Reservierung das Modell wechseln?', a: 'Natürlich. Sie können das Modell wechseln, bis wir die finalen Zahlungen öffnen.' },
+      { q: 'Kann ich nach der Reservierung das Modell wechseln?', a: 'Natürlich. Sie können das Modell jederzeit wechseln, schreiben Sie uns einfach.' },
       { q: `Fliegt ${B} wirklich? Ist das sicher?`, a: `Ja, in kurzen Flügen. Die vier Rotoren kommen aus der Körpermitte und sitzen in Schutzringen, ${B} landet bei schwachem Akku selbst und stoppt die Motoren, sobald ihn jemand berührt. Im Haus fliegt er nur, wenn es nötig ist, etwa auf der Treppe. Flüge im Freien folgen den Regeln des jeweiligen Landes.` },
     ],
   },

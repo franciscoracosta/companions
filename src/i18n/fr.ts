@@ -16,7 +16,7 @@ const fr: Dict = {
     subtitle: `${B} est une famille de robots IA, de la taille d'une tasse, qui tiennent compagnie aux grands-parents, gardent un œil sur les enfants et animent toute la maison. Et quand il le faut, ils volent.`,
     cta: `Réserver mon ${B}`,
     secondary: 'Découvrir les robots',
-    note: 'Acompte 100 % remboursable · Sans engagement',
+    note: 'Réservation gratuite · Sans engagement',
   },
   marquee: ['Détection des chutes', 'Rappels de médicaments', 'Alertes de danger', 'IA embarquée', 'Fabriqué en Europe', 'Personnalité unique', 'Confidentialité avant tout', 'Pièces imprimées en 3D', `Mode vol`],
   lines: {
@@ -81,7 +81,7 @@ const fr: Dict = {
     items: [
       { title: 'Confidentialité par défaut', text: 'Traitement local, données chiffrées et conformité totale au RGPD.' },
       { title: 'Conçu en Europe', text: 'Conçu et testé au Portugal, avec des composants certifiés.' },
-      { title: 'Réservation sans risque', text: "Acompte remboursable à tout moment jusqu'à l'expédition." },
+      { title: 'Réservation sans risque', text: 'Réserver est gratuit. Nous ne demandons aucun paiement à ce stade.' },
     ],
   },
   roadmap: {
@@ -89,7 +89,7 @@ const fr: Dict = {
     title: "Du prototype jusqu'à chez vous.",
     steps: [
       { date: '2026', title: 'Prototype fonctionnel', text: `Les premiers ${B} roulent, voient et parlent dans notre laboratoire.`, done: true },
-      { date: 'Maintenant', title: 'Précommandes ouvertes', text: 'Réservez votre place dans la première série avec un acompte remboursable.', done: true },
+      { date: 'Maintenant', title: 'Précommandes ouvertes', text: 'Réservez votre place dans la première série, sans rien payer.', done: true },
       { date: 'T2 2027', title: 'Programme bêta', text: `Des familles sélectionnées testent ${B} chez elles et nous aident à peaufiner chaque détail.`, done: false },
       { date: 'T4 2027', title: 'Premières livraisons', text: `Les premiers ${B} arrivent chez ceux qui ont réservé en premier.`, done: false },
     ],
@@ -97,8 +97,8 @@ const fr: Dict = {
   preorder: {
     eyebrow: 'Précommande',
     title: 'Réservez votre place dans la première série.',
-    subtitle: `Choisissez votre ${B} et laissez votre email. Vous ne payez l'acompte qu'à l'ouverture des paiements, et vous pouvez annuler à tout moment.`,
-    deposit: 'Acompte',
+    subtitle: `Choisissez votre ${B} et laissez votre email. La réservation est gratuite et sans engagement, et vous pouvez annuler à tout moment.`,
+    deposit: 'Réservation gratuite',
     choose: 'Choisir',
     selected: 'Choisi',
     emailLabel: 'Votre email',
@@ -114,11 +114,11 @@ const fr: Dict = {
     title: 'Questions fréquentes',
     items: [
       { q: `Quand ${B} sera-t-il livré ?`, a: "Les premières livraisons sont prévues au dernier trimestre 2027. Premier à réserver, premier servi, et nous vous tiendrons informé par email." },
-      { q: "L'acompte est-il vraiment remboursable ?", a: "Oui. Vous pouvez demander le remboursement intégral de votre acompte à tout moment avant l'expédition, sans justification." },
+      { q: 'Dois-je payer quelque chose pour réserver ?', a: 'Non. La réservation est gratuite et sans engagement. Si nous ouvrons un jour les paiements, nous vous préviendrons d\'abord par email, et vous pourrez toujours renoncer.' },
       { q: `${B} filme-t-il ma maison ?`, a: "Non. La vision et la voix sont traitées dans le robot. Seules les alertes et des données minimales vont vers l'appli, toujours chiffrées, et vous pouvez couper la caméra quand vous voulez." },
       { q: 'A-t-il besoin d’internet ?', a: "Les fonctions principales marchent hors ligne. Le Wi-Fi sert à envoyer les alertes à l'appli, à passer des appels vidéo et à recevoir les mises à jour." },
       { q: `${B} Care remplace-t-il un aidant ?`, a: `Non. ${B} est un compagnon et un soutien, pas un dispositif médical. Il aide à garder les routines et à informer la famille, mais ne remplace pas les soins professionnels.` },
-      { q: 'Puis-je changer de modèle après avoir réservé ?', a: "Bien sûr. Vous pouvez changer de modèle jusqu'à l'ouverture des paiements finaux." },
+      { q: 'Puis-je changer de modèle après avoir réservé ?', a: 'Bien sûr. Vous pouvez changer de modèle à tout moment, il suffit de nous écrire.' },
       { q: `${B} vole-t-il vraiment ? Est-ce sûr ?`, a: `Oui, sur de courts vols. Les quatre rotors sortent du milieu du corps et sont protégés, ${B} atterrit seul quand la batterie faiblit et coupe ses moteurs si on le touche. À la maison, il ne vole que lorsque c'est utile, par exemple pour monter les escaliers. Le vol en extérieur suit les règles de chaque pays.` },
     ],
   },
